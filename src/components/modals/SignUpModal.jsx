@@ -1,10 +1,10 @@
 import Overlay from "./Overlay";
 import PasswordInput from "./PasswordInput";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useState } from "react";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
+import SignInBtn from "./SignInBtn";
 
-function SignUpModal({ closeModal }) {
+function SignUpModal({ switchModal, closeModal }) {
   const [formData, setFormData] = useState({});
 
   function handleFormData({ target }) {
@@ -13,10 +13,7 @@ function SignUpModal({ closeModal }) {
   }
 
   return (
-    <Overlay>
-      <button onClick={closeModal}>
-        <IoIosCloseCircleOutline />
-      </button>
+    <Overlay closeModal={closeModal}>
       <h1>Join the Wag Wise community</h1>
       <form action="">
         <label htmlFor="username">username</label>
@@ -28,14 +25,14 @@ function SignUpModal({ closeModal }) {
         <ConfirmPasswordInput
           passwordData={formData.confirmPassword}
           handlePassword={handleFormData}
-          match={
-            formData.password !== formData.confirmPassword
-              ? "invalid"
-              : undefined
-          }
+          match={formData.password !== formData.confirmPassword}
         />
         <button type="submit">Get training!</button>
       </form>
+      <div className="sign-in">
+        <span>Already a member?</span>
+        <button onClick={switchModal}>Sign in</button>
+      </div>
     </Overlay>
   );
 }
