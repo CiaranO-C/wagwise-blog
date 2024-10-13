@@ -1,43 +1,221 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import PasswordField from "./PasswordField";
 import styled from "styled-components";
-import { ModalContext } from "../../app/provider";
+import { ModalContext } from "../../../app/providers/ModalProvider.jsx";
+import { login, signUp } from "../utils.js";
+import { AuthContext } from "../../../app/providers/AuthProvider.jsx";
+import {
+  validateConfirmPassword,
+  validatePassword,
+  validateTruthyForm,
+  validateUsername,
+} from "./validate.js";
 
 function AuthForm() {
-  const { modal: formType } = useContext(ModalContext);
-  const [formData, setFormData] = useState({});
+  const { setUser } = useContext(AuthContext);
+  const { modal: formType, setModal, setAnimate } = useContext(ModalContext);
+  const focusRef = useRef(null);
+  const initialMount = useRef(true);
+  const formRef = useRef(null);
+  const submitRef = useRef(null);
+  const validateRef = useRef({});
+  const isSignUp = formType === "signUp";
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [errors, setErrors] = useState({});
 
-  function handleFormData({ target }) {
-    const field = target.id;
-    setFormData({ ...formData, [field]: target.value });
+  //if sign up / sign in toggled wipe inputs clean
+  useEffect(() => {
+    if (!initialMount.current) {
+      setFormData({
+        username: "",
+        password: "",
+        confirmPassword: "",
+      });
+      setErrors({});
+    } else {
+      initialMount.current = false;
+    }
+  }, [formType]);
+
+  useEffect(() => {
+    if (focusRef.current) {
+      focusRef.current.focus();
+    }
+  }, [formType]);
+
+  const validators = {
+    username: handleUsername,
+    password: handlePassword,
+    confirmPassword: handleConfirmPassword,
+  };
+
+  const authUtils = {
+    signIn: handleSignIn,
+    signUp: handleSignUp,
+  };
+
+  async function handleSignIn() {
+    const userLogin = await login(formData.username, formData.password);
+    console.log(userLogin);
+
+    if (userLogin?.error) {
+      return setErrors((prev) => ({ ...prev, form: userLogin.error }));
+    }
+    setUser(userLogin.user);
+    setModal(false);
+    setAnimate(true);
   }
 
-  const submitText = formType === "signUp" ? "Get started!" : "Sign in";
+  async function handleSignUp() {
+    const newUser = await signUp(
+      formData.username,
+      formData.password,
+      formData.confirmPassword,
+    );
+    console.log(newUser);
+
+    if (newUser?.errors) {
+      return setErrors((prev) => ({ ...prev, form: newUser.errors[0].msg }));
+    }
+
+    setModal("signIn");
+  }
+
+  function checkErrors() {
+    const errorValues = Object.values(errors);
+    return errorValues.some((err) => err);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!submitRef.current) submitRef.current = true;
+
+    const hasEmpties = checkForEmpties();
+    const hasErrors = checkErrors();
+
+    if (hasEmpties || hasErrors) {
+      console.log("Form Denied!");
+      return null;
+    }
+
+    await authUtils[formType]();
+  }
+
+  function checkForEmpties() {
+    const error = validateTruthyForm(isSignUp, formRef.current);
+    setErrors((prev) => ({ ...prev, form: error }));
+    return Boolean(error);
+  }
+
+  function handlePassword(password) {
+    const error = validatePassword(password);
+    setErrors((prev) => ({ ...prev, password: error }));
+    return Boolean(error);
+  }
+
+  function handleConfirmPassword(confirmPassword) {
+    const error = validateConfirmPassword(formData.password, confirmPassword);
+    setErrors((prev) => ({ ...prev, confirmPassword: error }));
+    return Boolean(error);
+  }
+
+  function handleUsername(username) {
+    const error = validateUsername(username);
+    setErrors((previous) => ({ ...previous, username: error }));
+    return Boolean(error);
+  }
+
+  function toggleFlag(id) {
+    const bool = Boolean(validateRef.current?.[id]);
+    validateRef.current = { ...validateRef.current, [id]: !bool };
+  }
+
+  function handleFormData(field, value) {
+    setFormData({ ...formData, [field]: value });
+  }
+
+  function handleBlur({ target }) {
+    const id = target.id;
+    const value = target.value;
+
+    if (!errors[id] && value) {
+      const error = validators[id](value);
+
+      if (error) toggleFlag(id);
+    } else if (!value) {
+      removeError(id);
+    }
+  }
+
+  function removeError(id) {
+    setErrors((prev) => ({ ...prev, [id]: null }));
+  }
+
+  function handleChange({ target }) {
+    const { id, value } = target;
+    //only re-validate flagged sign up fields
+    if (isSignUp && validateRef.current[id]) validators[id](value);
+    //only re-validate form if submit attempted
+    if (submitRef.current) checkForEmpties();
+    handleFormData(id, value);
+  }
+
+  const submitText = isSignUp ? "Get started!" : "Sign in";
   return (
-    <Form action="">
+    <Form ref={formRef} onSubmit={handleSubmit}>
       <label htmlFor="username">username</label>
-      <input type="text" name="username" id="username" />
+      <input
+        ref={focusRef}
+        onChange={handleChange}
+        onBlur={isSignUp ? handleBlur : null}
+        value={formData.username}
+        type="text"
+        name="username"
+        id="username"
+      />
+      <div className="error-container">
+        {errors.username && <p className="error-message">{errors.username}</p>}
+      </div>
       <PasswordField
         label="password"
         passwordData={formData.password}
-        handlePassword={handleFormData}
+        handlePassword={handleChange}
+        handleBlur={handleBlur}
         inputId="password"
       />
-      {formType === "signUp" && (
-        <PasswordField
-          label="confirm password"
-          passwordData={formData.confirmPassword}
-          handlePassword={handleFormData}
-          inputId="confirmPassword"
-          isInvalid={
-            formData.confirmPassword &&
-            formData.confirmPassword !== formData.password
-          }
-        />
+      <div className="error-container">
+        {errors.password && <p className="error-message">{errors.password}</p>}
+      </div>
+      {isSignUp && (
+        <>
+          <PasswordField
+            label="confirm password"
+            passwordData={formData.confirmPassword}
+            handlePassword={handleChange}
+            handleBlur={handleBlur}
+            inputId="confirmPassword"
+            isInvalid={
+              formData.confirmPassword &&
+              formData.confirmPassword !== formData.password
+            }
+          />
+          <div className="error-container">
+            {errors.confirmPassword && (
+              <p className="error-message">{errors.confirmPassword}</p>
+            )}
+          </div>
+        </>
       )}
       <button className="submit" type="submit">
         {submitText}
       </button>
+      <div className="error-container">
+        {errors.form && <p className="error-message">{errors.form}</p>}
+      </div>
     </Form>
   );
 }
@@ -45,7 +223,7 @@ function AuthForm() {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: clamp(225px, 50%, 400px);
   margin: 30px 0px;
   text-align: center;
 
@@ -55,16 +233,28 @@ const Form = styled.form`
   }
 
   input {
-    padding: 10px;
-    padding-right: 30px;
+    padding: 10px 30px;
     border: 0.75px solid #e9e9e9;
     border-radius: 10px;
     background-color: #e9e9e9;
     width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    text-align: center;
 
     &:focus {
       outline: 0.75px solid black;
     }
+  }
+
+  .error-container {
+    height: 15px;
+  }
+
+  .error-message {
+    font-size: 0.8rem;
+    color: red;
   }
 
   .submit {
