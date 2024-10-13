@@ -15,15 +15,18 @@
 }
 
 a {
-  font-weight: 500;
-  color: #585ecb;
+  color: black;
   text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  border-bottom: 1px solid #b8c671;
+  transition: 0.3s ease-out; 
 }
 
-body {
+a:hover {
+  border-color: #000000;
+}
+
+body,
+#root {
   min-width: 320px;
   min-height: 100vh;
 }
