@@ -1,12 +1,11 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import styled from "styled-components";
-import { SlideUp } from "../sharedStyles";
 import { useContext } from "react";
-import { ModalContext } from "../../app/provider";
+import { ModalContext } from "../../../app/providers/ModalProvider.jsx";
+import { SlideUp } from "../../../components/styles/animation.jsx";
 
 function Overlay({ children }) {
   const { setModal, animate, setAnimate } = useContext(ModalContext);
-console.log(animate);
 
   return (
     <Backdrop className={animate ? "slide" : undefined}>

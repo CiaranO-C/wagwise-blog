@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { ModalContext } from "../../app/provider";
+import { ModalContext } from "../../../app/providers/ModalProvider.jsx"
 
 function ModalFooter() {
   const { modal, setModal, setAnimate } = useContext(ModalContext);
@@ -24,5 +24,17 @@ function ModalFooter() {
     </Footer>
   );
 }
-const Footer = styled.footer``;
+const Footer = styled.footer`
+button {
+cursor: pointer;
+background: none;
+border: none;
+font-weight: 550;
+font-size: inherit;
+font-family: inherit;
+margin-left: 5px;
+transition: 0.2s ease-out;
+text-decoration: underline;
+}
+`;
 export default ModalFooter;

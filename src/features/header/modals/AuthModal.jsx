@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ModalContext } from "../../app/provider";
+import { ModalContext } from "../../../app/providers/ModalProvider.jsx"
 import Overlay from "./Overlay";
 import AuthForm from "./AuthForm";
 import ModalFooter from "./ModalFooter";
@@ -22,6 +22,7 @@ function AuthModal() {
 const Title = styled.h1`
   font-weight: 200;
   font-size: 3rem;
+  text-align: center;
 `;
 
 export default AuthModal;
