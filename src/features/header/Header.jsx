@@ -2,32 +2,52 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useContext } from "react";
 import { createPortal } from "react-dom";
-import { ModalContext } from "../app/provider";
+import { ModalContext } from "../../app/providers/ModalProvider.jsx";
 import AuthModal from "./modals/AuthModal";
+import { Button } from "../../components/styles/styles.jsx";
+import { AuthContext } from "../../app/providers/AuthProvider.jsx";
+import { deleteToken } from "../../api/utils.js"
 
 function Header() {
   const { modal, setModal } = useContext(ModalContext);
+  const { user, setUser } = useContext(AuthContext);
 
   return (
     <>
       <MainHeader>
         <div className="header-content">
-          <Link to="/">
+          <Link className="home-link" to="/">
+            <div className="sun" />
             <img src="src/assets/wagwise-logo.png" alt="wagwise logo" />
           </Link>
           <HeaderButtons>
-            {<NavLink to="/about">About</NavLink>}
-            <button className="sign-in" onClick={() => setModal("signIn")}>
-              Sign in
-            </button>
-            <button className="sign-up" onClick={() => setModal("signUp")}>
-              Get Wise
-            </button>
+            <NavLink to="/about">About</NavLink>
+            {user ? (
+              <>
+                <p>{user.username}</p>
+                <button
+                  onClick={() => {
+                    deleteToken();
+                    setUser(null);
+                  }}
+                  className="logout"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <button className="sign-in" onClick={() => setModal("signIn")}>
+                  Sign in
+                </button>
+                <button className="sign-up" onClick={() => setModal("signUp")}>
+                  Get Wise
+                </button>
+              </>
+            )}
           </HeaderButtons>
         </div>
-        <HeaderTrim>
-          <img src="src/assets/paws.png" />
-        </HeaderTrim>
+        <HeaderTrim />
       </MainHeader>
       {modal && createPortal(<AuthModal />, document.body)}
     </>
@@ -39,18 +59,51 @@ const MainHeader = styled.header`
   flex-direction: column;
   align-items: center;
   background-color: #b6c471;
+  overflow: hidden;
+  padding: 0px 20px;
+
+  &,
+  & * {
+    letter-spacing: 0.5px;
+  }
 
   .header-content {
     height: 90px;
-    max-width: 1300px;
+    max-width: 1200px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 0px;
     background-color: #b8c671;
   }
+
+  .home-link {
+    position: relative;
+  }
+
+  .sun {
+    width: 275px;
+    height: 275px;
+    border-radius: 50%;
+    background-color: #f9d23f;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    box-shadow:
+      rgba(17, 17, 26, 0.1) 8px 0px 24px,
+      rgba(17, 17, 26, 0.1) 16px 0px 56px,
+      rgba(17, 17, 26, 0.1) 24px 0px 80px,
+      rgba(17, 17, 26, 0.1) -8px 0px 24px,
+      rgba(17, 17, 26, 0.1) -16px 0px 56px,
+      rgba(17, 17, 26, 0.1) -24px 0px 80px;
+  }
+
   img {
+    position: relative;
+    z-index: 1;
     height: 40px;
   }
 `;
@@ -61,21 +114,33 @@ const HeaderButtons = styled.div`
   gap: 15px;
 
   button {
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 20px;
-    font-size: 1rem;
+    ${Button}
   }
 
   .sign-in {
+    padding: 0;
+    border-radius: 0px;
     background: none;
     border: none;
+    border-bottom: 1px solid transparent;
+    color: black;
+    transition: border 0.3s ease-out;
+
+    &:hover {
+      border-color: black;
+    }
   }
 
-  .sign-up {
-    background-color: black;
-    border: none;
-    color: white;
+  .sign-up,
+  .logout {
+    border: 1px solid black;
+    transition: 0.25s ease-out;
+
+    &:hover {
+      background-color: #f9d23f;
+      border: 1px solid black;
+      color: black;
+    }
   }
 `;
 
@@ -85,11 +150,11 @@ const HeaderTrim = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 100%;
+  width: 150%;
 
   height: 30px;
   background-color: #899648;
-  border-top: 0.75px solid black;
+  border-top: 1px solid black;
   box-shadow:
     rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
