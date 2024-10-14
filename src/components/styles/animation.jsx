@@ -11,4 +11,27 @@ const SlideUp = keyframes`
 }
 `;
 
-export { SlideUp };
+const ExpandFromTop = keyframes`
+0% {
+transform-origin: top;
+transform: scaleY(0);
+}
+100% {
+transform-origin: top;
+transform: scaleY(1);
+}
+`;
+
+const FadeIn = keyframes`
+0% {
+opacity: 0;
+}
+90% {
+opactiy: 0;
+}
+100% {
+opacity: 1;
+}
+`;
+
+export { SlideUp, ExpandFromTop, FadeIn };
