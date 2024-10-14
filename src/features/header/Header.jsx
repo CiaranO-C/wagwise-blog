@@ -6,7 +6,7 @@ import { ModalContext } from "../../app/providers/ModalProvider.jsx";
 import AuthModal from "./modals/AuthModal";
 import { Button } from "../../components/styles/styles.jsx";
 import { AuthContext } from "../../app/providers/AuthProvider.jsx";
-import { deleteToken } from "../../api/utils.js"
+import { deleteToken } from "../../api/utils.js";
 
 function Header() {
   const { modal, setModal } = useContext(ModalContext);
@@ -21,10 +21,15 @@ function Header() {
             <img src="src/assets/wagwise-logo.png" alt="wagwise logo" />
           </Link>
           <HeaderButtons>
+            <NavLink to="/home">Home</NavLink>
             <NavLink to="/about">About</NavLink>
+            <div className="divider" />
             {user ? (
               <>
-                <p>{user.username}</p>
+                <p>
+                  Welcome back,{" "}
+                  <span className="username">{user.username}</span>
+                </p>
                 <button
                   onClick={() => {
                     deleteToken();
@@ -83,6 +88,7 @@ const MainHeader = styled.header`
   }
 
   .sun {
+    color: rgba(17, 17, 26, 0.1);
     width: 275px;
     height: 275px;
     border-radius: 50%;
@@ -93,12 +99,18 @@ const MainHeader = styled.header`
     transform: translate(-50%, -50%);
     z-index: 0;
     box-shadow:
-      rgba(17, 17, 26, 0.1) 8px 0px 24px,
-      rgba(17, 17, 26, 0.1) 16px 0px 56px,
-      rgba(17, 17, 26, 0.1) 24px 0px 80px,
-      rgba(17, 17, 26, 0.1) -8px 0px 24px,
-      rgba(17, 17, 26, 0.1) -16px 0px 56px,
-      rgba(17, 17, 26, 0.1) -24px 0px 80px;
+      8px 0px 24px,
+      16px 0px 56px,
+      24px 0px 80px,
+      -8px 0px 24px,
+      -16px 0px 56px,
+      -24px 0px 80px;
+    transition: color 0.6s ease-in-out;
+  }
+
+  .home-link:hover .sun,
+  .sun:hover {
+    color: #f9d23f;
   }
 
   img {
@@ -112,6 +124,15 @@ const HeaderButtons = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+
+  .divider {
+    border: 0.5px solid black;
+    align-self: stretch;
+  }
+
+  .username {
+    font-weight: 500;
+  }
 
   button {
     ${Button}
@@ -141,6 +162,10 @@ const HeaderButtons = styled.div`
       border: 1px solid black;
       color: black;
     }
+  }
+
+  .active {
+    border-color: black;
   }
 `;
 
