@@ -1,5 +1,6 @@
 import App from "../App";
 import About from "../routes/About";
+import Home from '../routes/Home';
 import Landing from "../routes/Landing";
 
 const routesConfig = [
@@ -15,6 +16,10 @@ const routesConfig = [
         path: "about",
         element: <About />,
       },
+      {
+        path: "home",
+        element: <Home />,
+      }
     ],
   },
 ];
