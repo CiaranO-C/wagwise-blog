@@ -1,7 +1,11 @@
+import Article from "../../features/article/Article";
 import App from "../App";
 import About from "../routes/About";
-import Home from '../routes/Home';
+import ArticlePage from "../routes/ArticlePage";
+import Home from "../routes/Home";
 import Landing from "../routes/Landing";
+import SearchResults from "../routes/SearchResults";
+import { homeLoader } from "./loaders";
 
 const routesConfig = [
   {
@@ -19,7 +23,22 @@ const routesConfig = [
       {
         path: "home",
         element: <Home />,
-      }
+        loader: homeLoader,
+      },
+      {
+        path: "search",
+        element: <SearchResults />,
+      },
+      {
+        path: "article",
+        element: <ArticlePage />,
+        children: [
+          {
+            path: ":id",
+            element: <Article />,
+          },
+        ],
+      },
     ],
   },
 ];
