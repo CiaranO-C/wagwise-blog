@@ -8,13 +8,24 @@ async function searchArticles(search) {
   return articles;
 }
 
-async function mostRecent() {
-  const res = await fetch("/api/articles?limit=1");
+async function getArticles() {
+  const res = await fetch("/api/articles");
 
-  if (!res.ok) return false;
+  if (!res.ok) return { articles: null, error: res.status };
 
   const { articles } = await res.json();
-  return articles;
+
+  return { articles, error: null };
 }
 
-export { searchArticles, mostRecent };
+async function getArticle(id) {
+  const res = await fetch(`/api/articles/${id}`);
+
+  if (!res.ok) return { article: null, error: res.status };
+
+  const { article } = await res.json();
+
+  return { article, error: null };
+}
+
+export { searchArticles, getArticles, getArticle };
