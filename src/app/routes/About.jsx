@@ -1,29 +1,43 @@
 import styled from "styled-components";
-import { ExpandFromTop, FadeIn } from '../../components/styles/animation';
+import { ExpandFromTop, FadeIn } from "../../components/styles/animation";
+import Footer from "../../features/footer/Footer";
 
 function About() {
   return (
-    <AboutMain>
-      <h1>About</h1>
-      <p>
-        At Wag Wise, we believe that every dog has the potential to be a well
-        behaved, confident companion. Our mission is to strengthen the bond
-        between you and your dog through positive reinforcement training
-        techniques. With patience, consistency, and a lot of love, we help dogs
-        and their owners lead happier, more harmonious lives. Let’s make every
-        wag a wise one!
-      </p>
-      <img className="paws-one" src="src/assets/paws.png" alt="dog paws backdrop" />
-      <img className="paws-two" src="src/assets/paws.png" alt="dog paws backdrop" />
-    </AboutMain>
+    <>
+      <AboutMain>
+        <h1>About</h1>
+        <p>
+          At Wag Wise, we believe that every dog has the potential to be a well
+          behaved, confident companion. Our mission is to strengthen the bond
+          between you and your dog through positive reinforcement training
+          techniques. With patience, consistency, and a lot of love, we help
+          dogs and their owners lead happier, more harmonious lives. Let’s make
+          every wag a wise one!
+        </p>
+        <img
+          className="paws-one"
+          src="src/assets/png/paws.png"
+          alt="dog paws backdrop"
+        />
+        <img
+          className="paws-two"
+          src="src/assets/png/paws.png"
+          alt="dog paws backdrop"
+        />
+      </AboutMain>
+      <Footer />
+    </>
   );
 }
 
 const AboutMain = styled.main`
+grid-row: 2/3;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px;
+  padding-bottom: 0px;
   position: relative;
   overflow: hidden;
   gap: 30px;
@@ -38,9 +52,9 @@ const AboutMain = styled.main`
 
   .paws-one,
   .paws-two {
-  pointer-events: none;
-  user-select: none;
-  animation-delay: 0.8s;
+    pointer-events: none;
+    user-select: none;
+    animation-delay: 0.8s;
     position: absolute;
     height: 800px;
     filter: opacity(0.25);
