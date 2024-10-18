@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
 import Header from "../features/header/Header.jsx";
-import Footer from "../features/footer/Footer.jsx";
 import styled from "styled-components";
 import { ModalProvider } from "./providers/ModalProvider.jsx";
 import { AuthContext } from "./providers/AuthProvider.jsx";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { userLoader } from "../api/user.js";
 import { getToken } from "../api/utils.js";
 
@@ -26,7 +25,6 @@ function App() {
       <Layout>
         <Header />
         <Outlet />
-        <Footer />
       </Layout>
     </ModalProvider>
   );
@@ -34,7 +32,7 @@ function App() {
 
 const Layout = styled.main`
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 120px 1fr 40px;
   height: 100vh;
 `;
 
