@@ -1,0 +1,51 @@
+import styled from "styled-components";
+
+function Categories({ tags }) {
+  return (
+    <Div>
+      <h1>Categories</h1>
+      {tags.map((tag) => (
+        <div key={tag.tagName} className="tag">
+          <p>{tag.tagName}</p>
+        </div>
+      ))}
+    </Div>
+  );
+}
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0px;
+  background-color: cornsilk;
+
+  h1 {
+    font-size: 2rem;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+    text-align: center;
+    padding: 0px 20px 10px;
+  }
+
+  .tag {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    height: 45px;
+    padding: 5px 20px;
+    transition: 0.3s ease-out;
+    cursor: pointer;
+  }
+
+  .tag:hover {
+    background-color: #4e5040ad;
+    color: white;
+    border-left: 5px solid #4e5040;
+  }
+
+  .tag + .tag {
+    border-top: 0.75px solid;
+  }
+`;
+
+export default Categories;
