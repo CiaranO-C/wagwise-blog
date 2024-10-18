@@ -34,4 +34,13 @@ opacity: 1;
 }
 `;
 
-export { SlideUp, ExpandFromTop, FadeIn };
+const SlideToLeft = keyframes`
+0% {
+transform: translateX(0%);
+}
+100% {
+transform: translateX(-100%);
+}
+`;
+
+export { SlideUp, ExpandFromTop, FadeIn, SlideToLeft };
