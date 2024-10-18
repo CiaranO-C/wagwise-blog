@@ -87,13 +87,13 @@ function PageNums({ itemsPerPage, itemCount, setItemRange }) {
 
 const PageNumContainer = styled.div`
   display: flex;
-  border: 1px solid white;
+  border: 1px solid;
   width: max-content;
   height: 50px;
   gap: 5px;
   border-radius: 25px;
-  justify-self: center;
-  align-self: end;
+  margin-top: 20px;
+  margin-bottom: 20px;
 
   button {
     cursor: pointer;
@@ -112,18 +112,27 @@ const PageNumContainer = styled.div`
     background-color: #ffffff00;
     border: none;
     text-align: center;
-    padding: 10px;
-    color: white;
+    margin: 10px;
+    margin-bottom: 9px;
+    border-bottom: 1px solid transparent;
   }
 
   .page:disabled {
-    color: orange;
+    color: black;
+    border-bottom-color: black;
+    margin-bottom: 9px;
   }
 
   .arrow {
     svg {
       width: 30px;
       height: 30px;
+      border-radius: 50%;
+      transition: 0.2s ease-out;
+    }
+
+    &:not(:disabled):hover svg {
+    background-color: #f9d23f;
     }
   }
 `;

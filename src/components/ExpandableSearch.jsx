@@ -4,7 +4,7 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import Search from "./Searchbar";
 import { FadeIn } from "./styles/animation";
 
-function ExpandableSearch({ intialPosition }) {
+function ExpandableSearch({ intialPosition, buttonRef }) {
   const [open, setOpen] = useState(intialPosition);
   const inputRef = useRef(null);
 
@@ -15,11 +15,12 @@ function ExpandableSearch({ intialPosition }) {
   }, [open]);
 
   return (
-    <Header className={!open ? "closed" : undefined}>
+    <Header className={open ? "mainOpen" : "closed"}>
       <div className={open ? "content open" : "content"}>
         <Search inputRef={inputRef} />
       </div>
       <button
+        ref={buttonRef}
         onClick={() => setOpen((o) => !o)}
         className={open ? "toggle open" : "toggle"}
       >
@@ -30,13 +31,20 @@ function ExpandableSearch({ intialPosition }) {
 }
 
 const Header = styled.header`
-  position: absolute;
+  position: fixed;
+  top: 120px;
+  z-index: 3;
   width: 100vw;
   display: flex;
   flex-direction: column;
 
+  &.mainOpen {
+    z-index: 4;
+  }
+
   &.closed {
     pointer-events: none;
+    z-index: 2;
   }
 
   & * {
@@ -44,10 +52,11 @@ const Header = styled.header`
   }
 
   .content {
+    z-index: 1;
     display: flex;
     align-items: center;
-    height: 50px;
-    padding: 0px 0px 30px 20px;
+    height: 100%;
+    padding-left: 20px;
     background-color: #899648;
     transform: scaleY(0);
     transform-origin: top;
@@ -64,8 +73,6 @@ const Header = styled.header`
 
   .toggle {
     pointer-events: auto;
-    left: 0;
-    right: 0;
     margin-left: auto;
     margin-right: auto;
     width: min-content;
@@ -73,11 +80,12 @@ const Header = styled.header`
     background-color: #899648;
     border: none;
     display: flex;
-    padding: 5px 10px;
-    transform: translateY(-50px);
+    padding: 2px 15px;
+    transform: translateY(-80px);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom: 1px solid;
+    z-index: 3;
 
     svg {
       pointer-events: none;
@@ -85,7 +93,8 @@ const Header = styled.header`
   }
 
   .open {
-    transform: scaleY(1);
+    z-index: 5;
+    transform: scaleY(1) translateY(-30px);
     box-shadow:
       rgba(0, 0, 0, 0.07) 0px 1px 1px,
       rgba(0, 0, 0, 0.07) 0px 2px 2px,
