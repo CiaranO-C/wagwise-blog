@@ -31,6 +31,8 @@ const MainFooter = styled.footer`
   background-color: #b8c671;
   height: 40px;
   width: 100vw;
+  margin-top: auto;
+  grid-row: 3/4;
 
   a {
     font-size: 0.8rem;

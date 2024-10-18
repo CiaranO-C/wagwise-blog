@@ -18,7 +18,7 @@ function Header() {
         <div className="header-content">
           <Link className="home-link" to="/">
             <div className="sun" />
-            <img src="src/assets/wagwise-logo.png" alt="wagwise logo" />
+            <img src="src/assets/wagwise/wagwise-logo.png" alt="wagwise logo" />
           </Link>
           <HeaderButtons>
             <NavLink to="/home">Home</NavLink>
@@ -66,6 +66,11 @@ const MainHeader = styled.header`
   background-color: #b6c471;
   overflow: hidden;
   padding: 0px 20px;
+  height: 120px;
+  z-index: 3;
+  position: fixed;
+  width: 100vw;
+  top: 0;
 
   &,
   & * {

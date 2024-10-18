@@ -18,6 +18,7 @@ function AuthForm() {
   const initialMount = useRef(true);
   const formRef = useRef(null);
   const submitRef = useRef(null);
+  const guestRef = useRef(null);
   const validateRef = useRef({});
   const isSignUp = formType === "signUp";
   const [formData, setFormData] = useState({
@@ -164,6 +165,15 @@ function AuthForm() {
     handleFormData(id, value);
   }
 
+  function handleGuest() {
+    setFormData({ username: "Guest", password: "guestPass1" });
+    setTimeout(() => {
+      if (guestRef.current) {
+        guestRef.current.click();
+      }
+    }, 0);
+  }
+
   const submitText = isSignUp ? "Get started!" : "Sign in";
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
@@ -210,9 +220,14 @@ function AuthForm() {
           </div>
         </>
       )}
-      <button className="submit" type="submit">
+      <button ref={guestRef} className="submit" type="submit">
         {submitText}
       </button>
+      {!isSignUp && (
+        <button className="submit" onClick={handleGuest}>
+          Guest account
+        </button>
+      )}
       <div className="error-container">
         {errors.form && <p className="error-message">{errors.form}</p>}
       </div>
@@ -255,6 +270,15 @@ const Form = styled.form`
   .error-message {
     font-size: 0.8rem;
     color: red;
+  }
+
+  button {
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:active {
+      transform: scale(1.1);
+    }
   }
 
   .submit {
