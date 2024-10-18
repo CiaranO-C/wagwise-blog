@@ -7,7 +7,7 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Wix Madefor Text", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,10 +19,15 @@ a {
   text-decoration: inherit;
   border-bottom: 1px solid #b8c671;
   transition: 0.3s ease-out; 
+  font-family: inherit;
 }
 
 a:hover {
   border-color: #000000;
+}
+
+main {
+  background-color: #b8c671;
 }
 
 body,

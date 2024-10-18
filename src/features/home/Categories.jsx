@@ -3,7 +3,7 @@ import styled from "styled-components";
 function Categories({ tags }) {
   return (
     <Div>
-      <h1>Categories</h1>
+      <h1>Top Categories</h1>
       {tags.map((tag) => (
         <div key={tag.tagName} className="tag">
           <p>{tag.tagName}</p>

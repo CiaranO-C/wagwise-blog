@@ -60,6 +60,10 @@ const SearchMain = styled.main`
   padding: 0px 20px;
   overflow: scroll;
 
+  h1 {
+  border-bottom: 0.75px solid;
+  }
+
   .title-container {
     margin-top: 35px;
     margin-bottom: 20px;

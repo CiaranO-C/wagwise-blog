@@ -1,4 +1,4 @@
-import { getArticles, getRecentlyCommented } from "../../api/article";
+import { getArticles, getArticle } from "../../api/article";
 import { getTags } from "../../api/tags";
 
 async function homeLoader() {
@@ -16,7 +16,7 @@ async function homeLoader() {
     (article) => article._count.comments > 0,
   )?.id;
 
-  const { article } = await getRecentlyCommented(recentlyCommentedId);
+  const { article } = await getArticle(recentlyCommentedId);
 
   return {
     articles: articlesData.articles,
