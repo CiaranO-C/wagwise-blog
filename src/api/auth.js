@@ -1,5 +1,5 @@
 async function postLogin(username, password) {
-  const response = await fetch("/api/user/log-in", {
+  const response = await fetch("https://wagwise-production.up.railway.app/api/user/log-in", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
@@ -11,7 +11,7 @@ async function postLogin(username, password) {
 }
 
 async function postSignUp(username, password, confirmPassword) {
-  const response = await fetch("/api/user/sign-up", {
+  const response = await fetch("https://wagwise-production.up.railway.app/api/user/sign-up", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({

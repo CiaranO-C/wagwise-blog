@@ -22,7 +22,7 @@ async function getUser() {
   try {
     const token = getToken();
     
-    const res = await fetch("/api/user", {
+    const res = await fetch("https://wagwise-production.up.railway.app/api/user", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ async function getUser() {
 
 async function refreshToken() {
   try {
-    const res = await fetch("/api/user/refresh-token", {
+    const res = await fetch("https://wagwise-production.up.railway.app/api/user/refresh-token", {
       credentials: "include",
     });
     if (!res.ok) return false;

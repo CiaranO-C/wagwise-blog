@@ -1,5 +1,5 @@
 async function getTags() {
-  const res = await fetch("/api/tags");
+  const res = await fetch("https://wagwise-production.up.railway.app/api/tags");
 
   if (!res.ok) return { tags: null, error: res.status };
 
@@ -9,7 +9,7 @@ async function getTags() {
 }
 
 async function getTag(tagName) {
-  const res = await fetch(`/api/tags/${tagName}`);
+  const res = await fetch(`https://wagwise-production.up.railway.app/api/tags/${tagName}`);
 
   if (!res.ok) return { tag: null, error: res.status };
 
