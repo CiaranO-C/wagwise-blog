@@ -8,4 +8,14 @@ async function getTags() {
   return { tags, error: null };
 }
 
-export { getTags };
+async function getTag(tagName) {
+  const res = await fetch(`/api/tags/${tagName}`);
+
+  if (!res.ok) return { tag: null, error: res.status };
+
+  const { tag } = await res.json();
+
+  return { tag, error: null };
+}
+
+export { getTags, getTag };
