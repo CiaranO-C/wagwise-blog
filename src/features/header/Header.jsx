@@ -7,6 +7,8 @@ import AuthModal from "./modals/AuthModal";
 import { Button } from "../../components/styles/styles.jsx";
 import { AuthContext } from "../../app/providers/AuthProvider.jsx";
 import { deleteToken } from "../../api/utils.js";
+import wagwiseLogo from '/assets/wagwise/wagwise-logo.png';
+
 
 function Header() {
   const { modal, setModal } = useContext(ModalContext);
@@ -18,7 +20,7 @@ function Header() {
         <div className="header-content">
           <Link className="home-link" to="/">
             <div className="sun" />
-            <img src="src/assets/wagwise/wagwise-logo.png" alt="wagwise logo" />
+            <img src={wagwiseLogo} alt="wagwise logo" />
           </Link>
           <HeaderButtons>
             <NavLink to="/home">Home</NavLink>
