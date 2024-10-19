@@ -4,35 +4,33 @@ import Footer from "../../features/footer/Footer";
 
 function About() {
   return (
-    <>
-      <AboutMain>
-        <h1>About</h1>
-        <p>
-          At Wag Wise, we believe that every dog has the potential to be a well
-          behaved, confident companion. Our mission is to strengthen the bond
-          between you and your dog through positive reinforcement training
-          techniques. With patience, consistency, and a lot of love, we help
-          dogs and their owners lead happier, more harmonious lives. Let’s make
-          every wag a wise one!
-        </p>
-        <img
-          className="paws-one"
-          src="src/assets/png/paws.png"
-          alt="dog paws backdrop"
-        />
-        <img
-          className="paws-two"
-          src="src/assets/png/paws.png"
-          alt="dog paws backdrop"
-        />
-      </AboutMain>
+    <AboutMain>
+      <h1>About</h1>
+      <p>
+        At Wag Wise, we believe that every dog has the potential to be a well
+        behaved, confident companion. Our mission is to strengthen the bond
+        between you and your dog through positive reinforcement training
+        techniques. With patience, consistency, and a lot of love, we help dogs
+        and their owners lead happier, more harmonious lives. Let’s make every
+        wag a wise one!
+      </p>
+      <img
+        className="paws-one"
+        src="src/assets/png/paws.png"
+        alt="dog paws backdrop"
+      />
+      <img
+        className="paws-two"
+        src="src/assets/png/paws.png"
+        alt="dog paws backdrop"
+      />
       <Footer />
-    </>
+    </AboutMain>
   );
 }
 
 const AboutMain = styled.main`
-grid-row: 2/3;
+  grid-row: 2 / 4;
   display: flex;
   flex-direction: column;
   align-items: center;
