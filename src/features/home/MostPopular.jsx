@@ -41,6 +41,7 @@ function MostPopular({ articles }) {
       <div className="carousel-frame">
         <div className="title">
           <LuBadge />
+          <LuBadge />
           <h2>
             Most
             <br />
@@ -99,6 +100,14 @@ const Section = styled.section`
         fill: rgb(249, 210, 63);
         stroke: black;
         stroke-width: 0.5;
+        z-index: 1;
+      }
+
+      svg + svg {
+        z-index: 0;
+        height: 105%;
+        width: 105%;
+        stroke: white;
       }
     }
   }
