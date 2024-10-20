@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { useRef, useState } from "react";
 import CarouselItem from "./CarouselItem";
 import { getRandomDog } from "./utils";
-import { PiOctagonThin } from "react-icons/pi";
+import { LuBadge } from "react-icons/lu";
+
 
 function MostPopular({ articles }) {
   const [index, setIndex] = useState(0);
@@ -40,7 +41,7 @@ function MostPopular({ articles }) {
       </button>
       <div className="carousel-frame">
         <div className="title">
-          <PiOctagonThin />
+          <LuBadge />
           <h2>Most<br/>popular</h2>
         </div>
         <div className={`slider index${index}`}>
