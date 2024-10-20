@@ -5,7 +5,6 @@ import CarouselItem from "./CarouselItem";
 import { getRandomDog } from "./utils";
 import { LuBadge } from "react-icons/lu";
 
-
 function MostPopular({ articles }) {
   const [index, setIndex] = useState(0);
   const images = useRef(getDogs());
@@ -42,7 +41,11 @@ function MostPopular({ articles }) {
       <div className="carousel-frame">
         <div className="title">
           <LuBadge />
-          <h2>Most<br/>popular</h2>
+          <h2>
+            Most
+            <br />
+            popular
+          </h2>
         </div>
         <div className={`slider index${index}`}>
           <CarouselItem article={articles[0]} dog={images.current[0]} />
@@ -72,22 +75,30 @@ const Section = styled.section`
     .title {
       position: absolute;
       display: flex;
-      color: #ffffffc4;
+      align-items: center;
+      justify-content: center;
+      color: black;
       z-index: 2;
       right: 0;
       bottom: 0;
-      width: 60px;
-      height: 60px;
+      width: 120px;
+      height: 120px;
+      transform: translate(-3px, -10px) rotate(13deg);
 
       h2 {
-        text-align: end;
+        text-align: center;
+        z-index: 1;
+        font-size: 1.15rem;
+        transform: translateY(-3px);
       }
 
       svg {
         position: absolute;
         height: 100%;
         width: 100%;
-        transform: rotate(45deg);
+        fill: rgb(249, 210, 63);
+        stroke: black;
+        stroke-width: 0.5;
       }
     }
   }
