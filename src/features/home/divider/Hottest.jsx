@@ -1,26 +1,54 @@
 import styled from "styled-components";
 import { LuDog } from "react-icons/lu";
+import { PiDogDuotone } from "react-icons/pi";
 import { PiChatThin } from "react-icons/pi";
 import { Button } from "../../../components/styles/styles";
+import { useContext } from "react";
+import { AuthContext } from "../../../app/providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { ModalContext } from "../../../app/providers/ModalProvider";
 
-function Hottest({ comments }) {
+function Hottest({ id, comments }) {
+  const { user } = useContext(AuthContext);
+  const { setModal } = useContext(ModalContext);
+  const navigate = useNavigate();
   const commentCount = 3;
 
+  function handleClick() {
+    //only users can comment, so redirect to signup
+    if (!user) return setModal("signUp");
+
+    //otherwise nav to article page
+    navigate(`/article/${id}`);
+  }
+
   return (
-    <Div className='content'>
+    <Div className="content">
+      <div className="bubble-container">
+        <div className="bubble one">
+          <PiChatThin />
+          <LuDog />
+        </div>
+        <div className="bubble two">
+          <PiChatThin />
+          <PiDogDuotone />
+        </div>
+      </div>
       <div className="comments">
-        <h2>Join the conversation</h2>
         {comments.slice(0, commentCount).map((comment) => (
           <div className="comment-container" key={comment.id}>
             <span className="author">{comment.author.username}:</span>
             <span className="comment">{comment.text}</span>
           </div>
         ))}
-        <button>Get involved</button>
-        <div className="bubble">
-          <PiChatThin />
-          <LuDog />
-        </div>
+      </div>
+      <div className="title">
+        <h2>
+          Join the
+          <br />
+          conversation
+        </h2>
+        <button onClick={handleClick}>Get involved</button>
       </div>
     </Div>
   );
@@ -28,19 +56,29 @@ function Hottest({ comments }) {
 
 const Div = styled.div`
   justify-content: space-evenly;
+  align-items: center;
+
+  .bubble-container {
+    position: relative;
+    width: 90px;
+    height: 100%;
+
+    @media screen and (max-width: 1150px) {
+      & {
+        display: none;
+      }
+    }
+  }
 
   .bubble {
+    position: absolute;
     width: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
     aspect-ratio: 1 / 1;
-    position: absolute;
-    left: 0;
-    transform: translate(-135%, 10px);
 
     & > svg:nth-child(1) {
-      transform: scaleX(-1) rotate(6deg);
       height: 100%;
       width: 100%;
     }
@@ -49,13 +87,17 @@ const Div = styled.div`
       height: 45%;
       width: 45%;
       position: absolute;
-      transform: rotate(9deg);
+      transform: rotate(3deg);
     }
 
-    @media screen and (max-width: 1150px) {
-      & {
-        display: none;
-      }
+    &.one {
+      bottom: 0;
+      transform: translate(-29px, -6px) rotate(351deg);
+    }
+
+    &.two {
+    top: 0;
+    transform: scaleX(-1) translate(-23px, -9px) rotate(340deg);
     }
   }
 
@@ -66,13 +108,23 @@ const Div = styled.div`
     align-items: center;
     position: relative;
 
+    @media screen and (max-width: 845px) {
+      & {
+        display: none;
+      }
+    }
+  }
+
+  .title {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+
     button {
       ${Button}
-      margin-top: auto;
       background-color: #f9d23f;
       color: black;
       font-size: 0.7rem;
-      width: max-content;
       height: 35px;
       display: flex;
       align-items: center;
@@ -83,10 +135,6 @@ const Div = styled.div`
         background-color: black;
       }
     }
-  }
-
-  h2 {
-    margin-bottom: 5px;
   }
 
   .comment-container {
