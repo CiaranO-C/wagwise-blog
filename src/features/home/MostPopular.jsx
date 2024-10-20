@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useRef, useState } from "react";
 import CarouselItem from "./CarouselItem";
 import { getRandomDog } from "./utils";
+import { PiOctagonThin } from "react-icons/pi";
 
 function MostPopular({ articles }) {
   const [index, setIndex] = useState(0);
@@ -38,7 +39,10 @@ function MostPopular({ articles }) {
         <AiOutlineArrowLeft />
       </button>
       <div className="carousel-frame">
-        <h2 className="title">Most popular</h2>
+        <div className="title">
+          <PiOctagonThin />
+          <h2>Most<br/>popular</h2>
+        </div>
         <div className={`slider index${index}`}>
           <CarouselItem article={articles[0]} dog={images.current[0]} />
           <CarouselItem article={articles[1]} dog={images.current[1]} />
@@ -66,16 +70,24 @@ const Section = styled.section`
 
     .title {
       position: absolute;
+      display: flex;
       color: #ffffffc4;
       z-index: 2;
-      left: 0;
+      right: 0;
       bottom: 0;
-      width: 100%;
-      text-align: end;
-      padding: 2px 5px;
-      background-color: #0000002e;
-      font-size: 1.3rem;
-      letter-spacing: 5px;
+      width: 60px;
+      height: 60px;
+
+      h2 {
+        text-align: end;
+      }
+
+      svg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        transform: rotate(45deg);
+      }
     }
   }
 
