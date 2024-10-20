@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 function Categories({ tags }) {
@@ -5,9 +6,9 @@ function Categories({ tags }) {
     <Div>
       <h1>Top Categories</h1>
       {tags.map((tag) => (
-        <div key={tag.tagName} className="tag">
+        <Link to={`/category/${tag.tagName}`} key={tag.tagName} className="tag">
           <p>{tag.tagName}</p>
-        </div>
+        </Link>
       ))}
     </Div>
   );
