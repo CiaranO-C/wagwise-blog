@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import ArticleCard from "../../components/ArticleCard";
+import { Link } from "react-router-dom";
 
 function CarouselItem({ article, dog }) {
   return (
-    <Item>
+    <Item to={`/article/${article.id}`}>
       <div className="article">
         <ArticleCard article={article} />
       </div>
@@ -12,7 +13,7 @@ function CarouselItem({ article, dog }) {
   );
 }
 
-const Item = styled.div`
+const Item = styled(Link)`
   flex: 0 0 100%;
   display: flex;
 
