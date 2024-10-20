@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Button } from "../../components/styles/styles";
 import { Link } from "react-router-dom";
 import Footer from "../../features/footer/Footer";
+import wagwiseDog from "/assets/wagwise/wagwise-dog.png";
 
 function Landing() {
   return (
@@ -20,7 +21,7 @@ function Landing() {
           </div>
           <div className="frame">
             <div className="shadow" />
-            <img src="src/assets/wagwise/wagwise-dog.png" alt="dog logo" />
+            <img src={wagwiseDog} alt="dog logo" />
           </div>
         </div>
       </LandingMain>

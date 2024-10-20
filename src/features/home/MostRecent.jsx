@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ArticleCard from "../../components/ArticleCard";
-import dogMain from "../../assets/dogs/dog-main.jpg";
+import dogMain from "/assets/dogs/dog-main.jpg";
 
 function MostRecent({ article }) {
   return (

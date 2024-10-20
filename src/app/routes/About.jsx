@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ExpandFromTop, FadeIn } from "../../components/styles/animation";
 import Footer from "../../features/footer/Footer";
+import paws from "/assets/png/paws.png";
 
 function About() {
   return (
@@ -14,16 +15,8 @@ function About() {
         and their owners lead happier, more harmonious lives. Let’s make every
         wag a wise one!
       </p>
-      <img
-        className="paws-one"
-        src="src/assets/png/paws.png"
-        alt="dog paws backdrop"
-      />
-      <img
-        className="paws-two"
-        src="src/assets/png/paws.png"
-        alt="dog paws backdrop"
-      />
+      <img className="paws-one" src={paws} alt="dog paws backdrop" />
+      <img className="paws-two" src={paws} alt="dog paws backdrop" />
       <Footer />
     </AboutMain>
   );

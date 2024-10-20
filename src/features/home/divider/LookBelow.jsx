@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Button } from "../../../components/styles/styles";
+import curvedArrow from "/assets/png/curved-arrow.png";
+
 
 function LookBelow() {
   return (
@@ -11,7 +12,7 @@ function LookBelow() {
         <br />
         below!
       </h2>
-      <img src="src/assets/png/curved-arrow.png" alt="arrow" />
+      <img src={curvedArrow} alt="arrow" />
     </Div>
   );
 }
