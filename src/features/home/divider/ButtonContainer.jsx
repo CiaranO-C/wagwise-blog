@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import { Button } from "../../../components/styles/styles";
 
-function ButtonContainer({ text, handleClick }) {
-  return (
-    <Div>
-      <button onClick={handleClick}>{text}</button>
-    </Div>
-  );
+function ButtonContainer({ children }) {
+  return <Div>{children}</Div>;
 }
 
 const Div = styled.div`
@@ -16,9 +11,8 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
 
-  button {
+  * {
     transform: translateY(-50%);
-    ${Button}
   }
 `;
 

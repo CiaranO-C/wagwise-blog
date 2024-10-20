@@ -2,16 +2,21 @@ import styled from "styled-components";
 import ButtonContainer from "./ButtonContainer";
 import Hottest from "./Hottest";
 import LookBelow from "./LookBelow";
+import { Link } from "react-router-dom";
+import { Button } from "../../../components/styles/styles";
 
 function Divider({ openSearch, article }) {
   return (
     <Section>
-      <ButtonContainer text={"Read article"} handleClick={null} />
-      <ButtonContainer
-        text={"Search for something else"}
-        handleClick={openSearch}
-      />
-      <Hottest comments={article.comments} />
+      <ButtonContainer>
+        <Link className="button" to={`/article/${article.id}`}>
+          Read article
+        </Link>
+      </ButtonContainer>
+      <ButtonContainer>
+        <button onClick={openSearch}>Search for something else</button>
+      </ButtonContainer>
+      <Hottest id={article.id} comments={article.comments} />
       <LookBelow />
     </Section>
   );
@@ -42,12 +47,16 @@ const Section = styled.section`
     right: 0;
   }
 
+  .button,
+  button {
+    ${Button}
+  }
+
   .content {
     flex: 1;
     display: flex;
     padding: 0px 20px;
     height: 145px;
-    flex-wrap: wrap;
 
     h2 {
       font-size: clamp(20px, 5vw, 2rem);
