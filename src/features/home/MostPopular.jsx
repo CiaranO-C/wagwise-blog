@@ -38,6 +38,7 @@ function MostPopular({ articles }) {
         <AiOutlineArrowLeft />
       </button>
       <div className="carousel-frame">
+        <h2 className="title">Most popular</h2>
         <div className={`slider index${index}`}>
           <CarouselItem article={articles[0]} dog={images.current[0]} />
           <CarouselItem article={articles[1]} dog={images.current[1]} />
@@ -57,10 +58,25 @@ const Section = styled.section`
   position: relative;
 
   .carousel-frame {
+    position: relative;
     display: flex;
     overflow: hidden;
     height: 100%;
     min-height: 400px;
+
+    .title {
+      position: absolute;
+      color: #ffffffc4;
+      z-index: 2;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: end;
+      padding: 2px 5px;
+      background-color: #0000002e;
+      font-size: 1.3rem;
+      letter-spacing: 5px;
+    }
   }
 
   .slider {

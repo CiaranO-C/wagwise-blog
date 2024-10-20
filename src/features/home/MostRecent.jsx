@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ArticleCard from "../../components/ArticleCard";
+import dogMain from "../../assets/dogs/dog-main.jpg";
 
 function MostRecent({ article }) {
   return (
@@ -10,7 +11,6 @@ function MostRecent({ article }) {
       </div>
       <div
         className="frame"
-        style={{ backgroundImage: `url(src/assets/dogs/dog-main.jpg)` }}
       />
     </Section>
   );
@@ -54,6 +54,7 @@ const Section = styled.section`
   .frame {
     flex: 1;
     background-color: grey;
+    background-image: url(${dogMain});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
