@@ -5,7 +5,7 @@ async function userLoader() {
   let user = initialUser;
   // unauthorized - invalid token
   console.log("user loader status -> ", initialStatus);
-  
+
   if (initialStatus === 401) {
     const refreshAccess = await refreshToken();
 
@@ -44,13 +44,15 @@ async function getUser() {
 async function refreshToken() {
   try {
     const res = await fetch(`${API_URL}/api/user/refresh-token`, {
-      credentials: "include",
+      headers: {
+        refresh: sessionStorage.getItem("refreshToken"),
+      },
     });
     if (!res.ok) return false;
     //valid refresh responds with new access token
     const { jwt, refreshToken } = await res.json();
     storeToken(jwt);
-    storeRefreshToken(refreshToken)
+    storeRefreshToken(refreshToken);
     return true;
   } catch (error) {
     console.error(error);
