@@ -1,5 +1,7 @@
+import { API_URL } from "./utils";
+
 async function searchArticles(search) {
-  const res = await fetch(`https://wagwise-production.up.railway.app/api/articles/search${search}`);
+  const res = await fetch(`${API_URL}/api/articles/search${search}`);
   console.log(res);
 
   if (!res.ok) return false;
@@ -9,7 +11,7 @@ async function searchArticles(search) {
 }
 
 async function getArticles() {
-  const res = await fetch("https://wagwise-production.up.railway.app/api/articles");
+  const res = await fetch(`${API_URL}/api/articles`);
 
   if (!res.ok) return { articles: null, error: res.status };
 
@@ -19,7 +21,7 @@ async function getArticles() {
 }
 
 async function getArticle(id) {
-  const res = await fetch(`https://wagwise-production.up.railway.app/api/articles/${id}`);
+  const res = await fetch(`${API_URL}/api/articles/${id}`);
 
   if (!res.ok) return { article: null, error: res.status };
 

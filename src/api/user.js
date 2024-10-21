@@ -1,9 +1,11 @@
-import { getToken, storeToken } from './utils';
+import { API_URL, getToken, storeToken } from "./utils";
 
 async function userLoader() {
   const { user: initialUser, status: initialStatus } = await getUser();
   let user = initialUser;
   // unauthorized - invalid token
+  console.log("user loader status -> ", initialStatus);
+  
   if (initialStatus === 401) {
     const refreshAccess = await refreshToken();
 
@@ -21,8 +23,8 @@ async function userLoader() {
 async function getUser() {
   try {
     const token = getToken();
-    
-    const res = await fetch("https://wagwise-production.up.railway.app/api/user", {
+
+    const res = await fetch(`${API_URL}/api/user`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,11 +43,11 @@ async function getUser() {
 
 async function refreshToken() {
   try {
-    const res = await fetch("https://wagwise-production.up.railway.app/api/user/refresh-token", {
+    const res = await fetch(`${API_URL}/api/user/refresh-token`, {
       credentials: "include",
     });
     if (!res.ok) return false;
-
+    //valid refresh responds with new access token
     const { jwt } = await res.json();
     storeToken(jwt);
     return true;

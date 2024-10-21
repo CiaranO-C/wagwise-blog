@@ -1,5 +1,7 @@
+import { API_URL } from "./utils";
+
 async function getTags() {
-  const res = await fetch("https://wagwise-production.up.railway.app/api/tags");
+  const res = await fetch(`${API_URL}/api/tags`);
 
   if (!res.ok) return { tags: null, error: res.status };
 
@@ -9,7 +11,7 @@ async function getTags() {
 }
 
 async function getTag(tagName) {
-  const res = await fetch(`https://wagwise-production.up.railway.app/api/tags/${tagName}`);
+  const res = await fetch(`${API_URL}/api/tags/${tagName}`);
 
   if (!res.ok) return { tag: null, error: res.status };
 

@@ -11,4 +11,6 @@ function deleteToken() {
   localStorage.removeItem("accessToken");
 }
 
-export { getToken, storeToken, deleteToken };
+const API_URL = import.meta.env.VITE_API_URL;
+
+export { getToken, storeToken, deleteToken, API_URL };
