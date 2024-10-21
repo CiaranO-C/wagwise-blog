@@ -9,7 +9,7 @@ function storeToken(token) {
 
 function storeRefreshToken(token) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString(); // 7 days
-  document.cookie = `refreshToken=${token}; expires=${expires}; secure; SameSite=None;`;
+  document.cookie = `refreshToken=${token}; path=/; expires=${expires}; secure; SameSite=None;`;
 }
 
 function deleteToken() {
