@@ -1,4 +1,4 @@
-import { API_URL, getToken, storeToken } from "./utils";
+import { API_URL, getToken, storeRefreshToken, storeToken } from "./utils";
 
 async function userLoader() {
   const { user: initialUser, status: initialStatus } = await getUser();
@@ -48,8 +48,9 @@ async function refreshToken() {
     });
     if (!res.ok) return false;
     //valid refresh responds with new access token
-    const { jwt } = await res.json();
+    const { jwt, refreshToken } = await res.json();
     storeToken(jwt);
+    storeRefreshToken(refreshToken)
     return true;
   } catch (error) {
     console.error(error);
