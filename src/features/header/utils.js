@@ -1,4 +1,4 @@
-import { storeToken } from '../../api/utils';
+import { storeRefreshToken, storeToken } from '../../api/utils';
 import { postLogin, postSignUp } from "../../api/auth";
 
 async function login(username, password) {
@@ -9,6 +9,7 @@ async function login(username, password) {
     console.log("log in response", resJson);
 
     storeToken(resJson.jwt);
+    storeRefreshToken(resJson.refreshToken);
     return resJson;
   } catch (error) {
     console.error(error);
