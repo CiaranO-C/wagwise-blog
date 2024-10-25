@@ -3,20 +3,24 @@ import ButtonContainer from "./ButtonContainer";
 import Hottest from "./Hottest";
 import LookBelow from "./LookBelow";
 import { Link } from "react-router-dom";
-import { Button } from "../../../components/styles/styles";
+import { Button, ButtonHoverYellow } from "../../../components/styles/styles";
 
-function Divider({ openSearch, article }) {
+import useArticle from "../../hooks/useArticle";
+
+function Divider({ openSearch, articleId }) {
+  const article = useArticle(articleId);
+
   return (
     <Section>
       <ButtonContainer>
-        <Link className="button" to={`/article/${article.id}`}>
+        <Link className="button" to={`/article/${articleId}`}>
           Read article
         </Link>
       </ButtonContainer>
       <ButtonContainer>
         <button onClick={openSearch}>Search for something else</button>
       </ButtonContainer>
-      <Hottest id={article.id} comments={article.comments} />
+      <Hottest id={articleId} comments={article ? article.comments : []} />
       <LookBelow />
     </Section>
   );
@@ -50,6 +54,7 @@ const Section = styled.section`
   .button,
   button {
     ${Button}
+    ${ButtonHoverYellow}
   }
 
   .content {
