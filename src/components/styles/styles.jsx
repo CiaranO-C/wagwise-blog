@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
 
 const Button = css`
   cursor: pointer;
@@ -10,7 +10,9 @@ const Button = css`
   padding: 12px 16px;
   border: 1px solid black;
   transition: 0.25s ease-out;
+`;
 
+const ButtonHoverYellow = css`
   &:hover {
     background-color: #f9d23f;
     border: 1px solid black;
@@ -18,4 +20,4 @@ const Button = css`
   }
 `;
 
-export { Button };
+export { Button, ButtonHoverYellow };

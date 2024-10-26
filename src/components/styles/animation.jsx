@@ -1,5 +1,14 @@
 import { keyframes } from "styled-components";
 
+const SlideDown = keyframes`
+0% {
+  transform: translateY(-100%);
+}
+100% {
+  transform:translateY(0%);
+}
+`;
+
 const SlideUp = keyframes`
 0% {
   transform: translateY(10px) scale(0.97);
@@ -43,4 +52,4 @@ transform: translateX(-100%);
 }
 `;
 
-export { SlideUp, ExpandFromTop, FadeIn, SlideToLeft };
+export { SlideUp, ExpandFromTop, FadeIn, SlideToLeft, SlideDown };
