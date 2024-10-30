@@ -1,11 +1,25 @@
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import useArticle from "../hooks/useArticle";
+import Spinner from "../../components/Spinner";
+import CommentSection from "./CommentSection";
+import { useContext } from "react";
+import { AuthContext } from "../../app/providers/AuthProvider";
+import ArticleSection from "./ArticleSection";
+import LikeSection from "./LikeSection";
 
 function Article() {
-  const { article } = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const { id } = useParams();
+  const article = useArticle(id);
+
+  if (!article)
+    return <Spinner styles={{ marginTop: "auto", placeSelf: "center" }} />;
 
   return (
     <>
-      <h1>{article.title}</h1>
+      {user && <LikeSection />}
+      <ArticleSection article={article} />
+      <CommentSection initialComments={article.comments} />
     </>
   );
 }
