@@ -60,4 +60,29 @@ async function refreshToken() {
   }
 }
 
-export { userLoader };
+async function updateLikes(articleId, like) {
+  try {
+    const token = localStorage.getItem("accessToken");
+    const res = await fetch(`${API_URL}/api/user/likes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        id: articleId,
+        like,
+      }),
+    });
+
+    if (!res.ok) return { updated: false, error: res.status };
+
+    const { updated } = await res.json();
+
+    return { updated, error: null };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { userLoader, updateLikes };
