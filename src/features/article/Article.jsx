@@ -17,8 +17,8 @@ function Article() {
 
   return (
     <>
-      {user && <LikeSection />}
       <ArticleSection article={article} />
+      {user && <LikeSection />}
       <CommentSection initialComments={article.comments} />
     </>
   );

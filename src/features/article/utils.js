@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+
 function timeElapsed(date) {
   const now = new Date();
   const created = new Date(date);
@@ -17,8 +19,8 @@ function timeElapsed(date) {
 }
 
 function sanitize(content) {
-    const sanitized = DOMPurify.sanitize(content);
-    return sanitized;
-  }
+  const sanitized = DOMPurify.sanitize(content);
+  return sanitized;
+}
 
 export { timeElapsed, sanitize };

@@ -14,12 +14,14 @@ function ArticleCategories({ categories }) {
 const Div = styled.div`
   display: flex;
   justify-content: center;
+  background-color: #4e5040;
 
   a {
-    color: red;
+    color: white;
+    border-color: transparent;
 
     &:hover {
-      border-color: red;
+      border-color: white;
     }
   }
 `;
