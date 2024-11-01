@@ -4,11 +4,10 @@ import { useContext } from "react";
 import { createPortal } from "react-dom";
 import { ModalContext } from "../../app/providers/ModalProvider.jsx";
 import AuthModal from "./modals/AuthModal";
-import { Button } from "../../components/styles/styles.jsx";
+import { Button, ButtonHoverYellow } from "../../components/styles/styles.jsx";
 import { AuthContext } from "../../app/providers/AuthProvider.jsx";
 import { deleteToken } from "../../api/utils.js";
-import wagwiseLogo from '/assets/wagwise/wagwise-logo.png';
-
+import wagwiseLogo from "/assets/wagwise/wagwise-logo.png";
 
 function Header() {
   const { modal, setModal } = useContext(ModalContext);
@@ -125,6 +124,11 @@ const MainHeader = styled.header`
     z-index: 1;
     height: 40px;
   }
+
+  a:active,
+  button:active {
+    transform: scale(1.1);
+  }
 `;
 
 const HeaderButtons = styled.div`
@@ -161,14 +165,9 @@ const HeaderButtons = styled.div`
 
   .sign-up,
   .logout {
+    ${ButtonHoverYellow}
     border: 1px solid black;
     transition: 0.25s ease-out;
-
-    &:hover {
-      background-color: #f9d23f;
-      border: 1px solid black;
-      color: black;
-    }
   }
 
   .active {

@@ -37,16 +37,14 @@ function Hottest({ id, comments }) {
       </div>
       <div className="comments">
         {comments.slice(0, commentCount).map((comment, index) => (
-          <>
-            <div
-              className="comment-container"
-              key={comment.id}
-              style={{ animationDelay: `${index * 0.3}s` }}
-            >
-              <span className="author">{comment.author.username}:</span>
-              <span className="comment">{comment.text}</span>
-            </div>
-          </>
+          <div
+            className="comment-container"
+            key={comment.id}
+            style={{ animationDelay: `${index * 0.3}s` }}
+          >
+            <span className="author">{comment.author.username}:</span>
+            <span className="comment">{comment.text}</span>
+          </div>
         ))}
       </div>
       <div className="title">
@@ -151,7 +149,7 @@ const Div = styled.div`
     font-size: 1rem;
     align-self: start;
     padding-left: 5px;
-    opacity: 0; 
+    opacity: 0;
 
     animation:
       ${FadeIn} 0.3s ease-in forwards,

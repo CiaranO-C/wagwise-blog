@@ -7,20 +7,20 @@ import { Button, ButtonHoverYellow } from "../../../components/styles/styles";
 
 import useArticle from "../../hooks/useArticle";
 
-function Divider({ openSearch, articleId }) {
-  const article = useArticle(articleId);
+function Divider({ openSearch, mostRecent, commented }) {
+  const article = useArticle(commented);
 
   return (
     <Section>
       <ButtonContainer>
-        <Link className="button" to={`/article/${articleId}`}>
+        <Link className="button" to={`/article/${mostRecent}`}>
           Read article
         </Link>
       </ButtonContainer>
       <ButtonContainer>
         <button onClick={openSearch}>Search for something else</button>
       </ButtonContainer>
-      <Hottest id={articleId} comments={article ? article.comments : []} />
+      <Hottest id={commented} comments={article ? article.comments : []} />
       <LookBelow />
     </Section>
   );

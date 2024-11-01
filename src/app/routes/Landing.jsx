@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../../components/styles/styles";
+import { Button, ButtonHoverYellow } from "../../components/styles/styles";
 import { Link } from "react-router-dom";
 import Footer from "../../features/footer/Footer";
 import wagwiseDog from "/assets/wagwise/wagwise-dog.png";
@@ -89,15 +89,10 @@ const LandingMain = styled.main`
 
     .button {
       ${Button}
+      ${ButtonHoverYellow}
       margin-top: 20px;
       border: 1px solid black;
       transition: 0.25s ease-out;
-
-      &:hover {
-        background-color: #f9d23f;
-        border: 1px solid black;
-        color: black;
-      }
     }
   }
 `;

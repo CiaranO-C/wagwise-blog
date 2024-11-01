@@ -5,7 +5,7 @@ function Footer() {
   return (
     <MainFooter>
       <a
-        href="insert href to CMS here"
+        href="http://localhost:5173/login"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -29,7 +29,7 @@ const MainFooter = styled.footer`
   justify-content: center;
   border-top: 0.75px solid #6b743d;
   background-color: #b8c671;
-  height: 40px;
+  min-height: 40px;
   width: 100vw;
   margin-top: auto;
   grid-row: 3/4;
