@@ -5,40 +5,47 @@ function throwResponse(error) {
   throw new Response(null, { status: error || 500 });
 }
 
-async function homeLoader() {
-  const articlesData = await getArticles();
-  const tagsData = await getTags();
+async function homeLoader(signal) {
+  const [articlesData, tagsData] = await Promise.all([
+    getArticles(signal),
+    getTags(signal),
+  ]);
 
-  const recentlyCommentedId = articlesData.articles.find(
-    (article) => article._count.comments > 0,
-  )?.id;
-  const articleData = await getArticle(recentlyCommentedId);
-
-  if (articlesData.error || tagsData.error || articleData.error) {
-    const error = articlesData.error || tagsData.error || articleData.error;
+  if (articlesData?.error || tagsData?.error) {
+    const error = articlesData.error || tagsData.error;
     throwResponse(error);
+  }
+
+  if (signal.aborted) {
+    return null;
   }
 
   return {
     articles: articlesData.articles,
     tags: tagsData.tags,
-    recentlyCommented: articleData.article,
   };
 }
 
-async function articleLoader({ params }) {
-  const { id } = params;
-  const articleData = await getArticle(id);
+async function articleLoader(signal, id) {
+  const articleData = await getArticle(signal, id);
 
-  if (articleData.error) throwResponse(articleData.error);
+  if (articleData?.error) throwResponse(articleData.error);
+
+  if (signal.aborted) {
+    return null;
+  }
 
   return { article: articleData.article };
 }
 
-async function categoryLoader({ params }) {
-  const { name } = params;
-  const catData = await getTag(name);
-  return { category: catData.tag };
+async function categoryLoader(name, signal) {
+  const catData = await getTag(name, signal);
+
+  if (signal.aborted) {
+    return null;
+  }
+
+  return catData.tag;
 }
 
 export { homeLoader, articleLoader, categoryLoader };
