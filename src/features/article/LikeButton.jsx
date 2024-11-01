@@ -90,7 +90,7 @@ const Button = styled.button`
   }
 
   .svg-style {
-    fill: #b8c671;
+    fill: #f9d23f;
   }
 
   .hide {

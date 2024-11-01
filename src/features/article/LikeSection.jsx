@@ -29,24 +29,57 @@ function LikeSection() {
 
   return (
     <Section>
-      <LikeMessage>
-        <p>
-          Want to see more content like this?
-          <br />
-          leave us a like!
-        </p>
-        <LikeButton like={like} handleClick={handleClick} />
-      </LikeMessage>
+      <div className="line" />
+      <div className="container">
+        <LikeMessage>
+          <p>
+            Want to see more content like this?
+            <br />
+            leave us a like!
+          </p>
+          <LikeButton like={like} handleClick={handleClick} />
+        </LikeMessage>
+      </div>
     </Section>
   );
 }
 
-const Section = styled.section``;
+const Section = styled.section`
+  position: relative;
+  background-color: cornsilk;
+  width: 100%;
+  max-width: 1290px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+
+  .line {
+    background-color: black;
+    height: 2px;
+    border-radius: 100%;
+    width: 50%;
+    position: absolute;
+    z-index: 1;
+  }
+`;
 
 const LikeMessage = styled.section`
+  position: absolute;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 10px;
+  background-color: #f9d23f;
+  border: 1px solid;
+  padding: 15px 25px;
+  border-radius: 35px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  transform: translateY(-50%);
 
   p {
     text-align: center;
