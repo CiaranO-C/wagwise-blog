@@ -4,15 +4,18 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { postComment } from "../../api/comment";
 
-function CommentForm() {
+function CommentForm({ handleNewComment, removeRecentComment }) {
   const { id: articleId } = useParams();
   const [comment, setComment] = useState("");
 
   async function handlePostComment(e) {
     e.preventDefault();
-    const posted = await postComment(comment, articleId);
-    if (posted.error) return;
-    //logic here to update comments list
+    if (comment) {
+      handleNewComment(comment);
+      setComment("");
+      const posted = await postComment(comment, articleId);
+      if (posted.error) return removeRecentComment();
+    }
   }
 
   return (
@@ -35,9 +38,40 @@ function CommentForm() {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  padding: 10px 20px;
 
   .input-container {
     display: flex;
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  input {
+    max-width: 30%;
+    min-width: 245px;
+    overflow-x: scroll;
+    flex: 1;
+    background: cornsilk;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 15px;
+    transition: background 0.3s ease-out;
+
+    &:focus {
+      outline: none;
+      background-color: #f9d23f;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 10px;
   }
 `;
 export default CommentForm;

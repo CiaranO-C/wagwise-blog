@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { timeElapsed } from "./utils";
+import UserBubble from "./UserBubble";
 
 function Comment({ comment }) {
-  console.log(comment);
-  const { id, text, authorId, articleId, created, review, author } = comment;
+  const { text, created, author } = comment;
 
   return (
     <Li>
       <div className="info">
-        <div className="user-bubble">{author.username[0].toUpperCase()}</div>
+        <UserBubble username={author.username} />
         <span>{author.username}</span>
         <span>{timeElapsed(created)}</span>
       </div>
@@ -39,16 +39,6 @@ const Li = styled.li`
     }
   }
 
-  .user-bubble {
-    text-align: center;
-    line-height: 1.8;
-    background-color: grey;
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-  }
-
   .text {
     display: flex;
 
@@ -58,10 +48,11 @@ const Li = styled.li`
   }
 
   .line {
+    color: #f9d23f;
     width: 25px;
-    border-bottom-left-radius: 5px;
-    border-bottom: 0.75px solid;
-    border-left: 0.75px solid;
+    border-bottom-left-radius: 10px;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
     margin-left: 15px;
     height: 10px;
     margin-top: 5px;
