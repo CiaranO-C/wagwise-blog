@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
-import { getArticle } from '../../api/article';
-
+import { getArticle } from "../../api/article";
+import { useNavigate } from "react-router-dom";
 
 function useArticle(articleId) {
   const [article, setArticle] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const controller = new AbortController();
 
     async function fetchArticle() {
       const articleData = await getArticle(controller.signal, articleId);
-      if (articleData?.article) {
-        setArticle(articleData.article);
+      if (articleData) {
+        const { article, error } = articleData;
+        if (error) {
+          return navigate("/error", {
+            state: articleData.error,
+            replace: true,
+          });
+        }
+        setArticle(article);
       }
     }
 
@@ -22,7 +30,7 @@ function useArticle(articleId) {
     return () => {
       controller.abort();
     };
-  }, [article, articleId]);
+  }, [article, articleId, navigate]);
 
   return article;
 }
