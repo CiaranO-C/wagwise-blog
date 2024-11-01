@@ -4,10 +4,11 @@ import App from "../App";
 import About from "../routes/About";
 import ArticlePage from "../routes/ArticlePage";
 import CategoryPage from "../routes/CategoryPage";
+import Error from '../routes/Error';
 import Home from "../routes/Home";
 import Landing from "../routes/Landing";
 import SearchResults from "../routes/SearchResults";
-import { articleLoader, categoryLoader, homeLoader } from "./loaders";
+import { articleLoader, categoryLoader } from "./loaders";
 
 const routesConfig = [
   {
@@ -25,7 +26,6 @@ const routesConfig = [
       {
         path: "home",
         element: <Home />,
-        loader: homeLoader,
       },
       {
         path: "search",
@@ -38,7 +38,6 @@ const routesConfig = [
           {
             path: ":id",
             element: <Article />,
-            loader: articleLoader,
           },
         ],
       },
@@ -49,10 +48,13 @@ const routesConfig = [
           {
             path: ":name",
             element: <Category />,
-            loader: categoryLoader,
           },
         ],
       },
+      {
+        path: "error",
+        element: <Error />,
+      }
     ],
   },
 ];
