@@ -10,24 +10,32 @@ async function searchArticles(search) {
   return articles;
 }
 
-async function getArticles() {
-  const res = await fetch(`${API_URL}/api/articles`);
+async function getArticles(signal) {
+  try {
+    const res = await fetch(`${API_URL}/api/articles`, { signal });
+    if (!res.ok) return { articles: null, error: res.status };
+    const { articles } = await res.json();
 
-  if (!res.ok) return { articles: null, error: res.status };
-
-  const { articles } = await res.json();
-
-  return { articles, error: null };
+    return { articles, error: null };
+  } catch (error) {
+    if (error.name === "AbortError") {
+      console.log("Fetch articles aborted");
+    }
+  }
 }
 
-async function getArticle(id) {
-  const res = await fetch(`${API_URL}/api/articles/${id}`);
+async function getArticle(signal, id) {
+  try {
+    const res = await fetch(`${API_URL}/api/articles/${id}`, { signal });
+    if (!res.ok) return { article: null, error: res.status };
+    const { article } = await res.json();
 
-  if (!res.ok) return { article: null, error: res.status };
-
-  const { article } = await res.json();
-
-  return { article, error: null };
+    return { article, error: null };
+  } catch (error) {
+    if (error.name === "AbortError") {
+      console.log(`Fetch article: ${id} aborted`);
+    }
+  }
 }
 
 export { searchArticles, getArticles, getArticle };
