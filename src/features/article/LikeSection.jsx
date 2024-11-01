@@ -24,6 +24,8 @@ function LikeSection() {
 
   function hasLiked() {
     if (!user) return null;
+    console.log("in hasLiked()", user);
+    
     return user.likes.some((userLike) => userLike.id === Number(articleId));
   }
 
