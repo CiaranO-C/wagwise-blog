@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner";
 import { categoryLoader } from "../../app/router/loaders";
 import { useParams } from "react-router-dom";
+import CategoryHeader from "./CategoryHeader";
+import RelatedCategories from "./RelatedCategories";
 
 function Category() {
   const { name } = useParams();
@@ -26,11 +28,21 @@ function Category() {
     };
   }, [category, loading, name]);
 
-  if (loading) return <Spinner styles={{ marginTop: "auto", placeSelf: "center" }}/>;
+  if (loading)
+    return <Spinner styles={{ marginTop: "auto", placeSelf: "center" }} />;
+
+  console.log(category);
 
   return (
     <>
-      <h1>{category.tagName}</h1>
+      <CategoryHeader
+        name={category.tagName}
+        articleCount={category.articles.length}
+      />
+      <RelatedCategories
+        current={category.tagName}
+        articles={category.articles}
+      />
     </>
   );
 }
