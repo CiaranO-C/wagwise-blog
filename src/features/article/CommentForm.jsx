@@ -1,19 +1,31 @@
 import styled from "styled-components";
 import { IoSend } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { postComment } from "../../api/comment";
+import { getToken } from "../../api/utils";
+import { AuthContext } from "../../app/providers/AuthProvider";
+import { ModalContext } from "../../app/providers/ModalProvider";
 
 function CommentForm({ handleNewComment, removeRecentComment }) {
   const { id: articleId } = useParams();
   const [comment, setComment] = useState("");
+  const { setUser } = useContext(AuthContext);
+  const { setModal } = useContext(ModalContext);
 
   async function handlePostComment(e) {
     e.preventDefault();
     if (comment) {
       handleNewComment(comment);
       setComment("");
-      const posted = await postComment(comment, articleId);
+      const { token, error } = await getToken();
+      if (error === "badTokens") {
+        setUser(null);
+        setModal("signIn");
+        removeRecentComment();
+        return;
+      }
+      const posted = await postComment(comment, articleId, token);
       if (posted.error) return removeRecentComment();
     }
   }

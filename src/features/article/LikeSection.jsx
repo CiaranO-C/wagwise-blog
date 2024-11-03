@@ -5,19 +5,34 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../app/providers/AuthProvider";
 import { ModalContext } from "../../app/providers/ModalProvider";
 import { updateLikes } from "../../api/user";
+import { getToken } from "../../api/utils";
 
 function LikeSection() {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { setModal } = useContext(ModalContext);
   const { id: articleId } = useParams();
   const [like, setLike] = useState(hasLiked);
 
   async function handleClick() {
     if (!user) return setModal("signUp");
+    
     const previousState = like;
     setLike((l) => !l);
-    const { updated, error } = await updateLikes(articleId, !like);
-    if (error) {
+
+    const { token, error: tokenError } = await getToken();
+    if (tokenError === "badTokens") {
+      setUser(null);
+      setModal("signIn");
+      setLike(previousState);
+      return;
+    }
+
+    const { updated, error: likeError } = await updateLikes(
+      articleId,
+      !like,
+      token,
+    );
+    if (likeError) {
       setLike(previousState);
     }
   }
@@ -25,7 +40,7 @@ function LikeSection() {
   function hasLiked() {
     if (!user) return null;
     console.log("in hasLiked()", user);
-    
+
     return user.likes.some((userLike) => userLike.id === Number(articleId));
   }
 
