@@ -11,13 +11,24 @@ function App() {
   const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     async function getUser() {
-      const user = await userLoader();
-      if (user) setUser(user.user);
+      const { token, error } = await getToken(signal);
+
+      if (token && !error) {
+        const user = await userLoader(signal, token);
+        if (user) setUser(user.user);
+      }
     }
-    if (!user && getToken()) {
+    if (!user) {
       getUser();
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [user, setUser]);
 
   return (
