@@ -1,7 +1,10 @@
-import { API_URL, getToken, storeRefreshToken, storeToken } from "./utils";
+import { API_URL, storeRefreshToken, storeToken } from "./utils";
 
-async function userLoader() {
-  const { user: initialUser, status: initialStatus } = await getUser();
+async function userLoader(signal, token) {
+  const { user: initialUser, status: initialStatus } = await getUser(
+    signal,
+    token,
+  );
   let user = initialUser;
   // unauthorized - invalid token
   console.log("user loader status -> ", initialStatus);
@@ -10,25 +13,23 @@ async function userLoader() {
     const refreshAccess = await refreshToken();
 
     if (refreshAccess) {
-      const { user: refreshUser } = await getUser();
+      const { user: refreshUser } = await getUser(signal, token);
       user = refreshUser;
     } else {
-      //null value for user will force login page
       return null;
     }
   }
   return user;
 }
 
-async function getUser() {
+async function getUser(signal, token) {
   try {
-    const token = getToken();
-
     const res = await fetch(`${API_URL}/api/user`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      signal,
     });
 
     if (res.ok) {
@@ -37,7 +38,12 @@ async function getUser() {
     }
     return { user: null, status: res.status };
   } catch (error) {
-    throw new Error(`Error fetching user: ${error.message}`);
+    if (error.name === "AbortError") {
+      console.log("Aborted fetch User");
+      return { user: null, status: null };
+    } else {
+      throw new Error(`Error fetching user: ${error.message}`);
+    }
   }
 }
 
@@ -60,9 +66,8 @@ async function refreshToken() {
   }
 }
 
-async function updateLikes(articleId, like) {
+async function updateLikes(articleId, like, token) {
   try {
-    const token = localStorage.getItem("accessToken");
     const res = await fetch(`${API_URL}/api/user/likes`, {
       method: "PUT",
       headers: {
