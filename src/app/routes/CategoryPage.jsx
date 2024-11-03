@@ -1,17 +1,23 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../../features/footer/Footer";
-import ExpandableSearch from '../../components/ExpandableSearch';
-import { useRef } from 'react';
+import ExpandableSearch from "../../components/ExpandableSearch";
+import { useRef } from "react";
 
 function CategoryPage() {
   const openSearchRef = useRef(null);
+
+  function openSearch() {
+    if (openSearchRef.current) {
+      openSearchRef.current.click();
+    }
+  }
 
   return (
     <>
       <ExpandableSearch intialPosition={false} buttonRef={openSearchRef} />
       <CategoryMain>
-        <Outlet />
+        <Outlet context={openSearch}/>
         <Footer />
       </CategoryMain>
     </>
