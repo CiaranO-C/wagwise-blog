@@ -13,7 +13,7 @@ function Hottest({ id, comments }) {
   const { user } = useContext(AuthContext);
   const { setModal } = useContext(ModalContext);
   const navigate = useNavigate();
-  const commentCount = 3;
+  const commentCount = 4;
 
   function handleClick() {
     //only users can comment, so redirect to signup
@@ -113,6 +113,7 @@ const Div = styled.div`
     flex-direction: column;
     align-items: center;
     position: relative;
+    gap: 5px;
 
     @media screen and (max-width: 845px) {
       & {

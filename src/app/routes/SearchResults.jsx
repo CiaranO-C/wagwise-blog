@@ -6,6 +6,7 @@ import PageNums from "../../components/Pagination.jsx";
 import { searchArticles } from "../../api/article.js";
 import ExpandableSearch from "../../components/ExpandableSearch.jsx";
 import Footer from "../../features/footer/Footer.jsx";
+import Spinner from "../../components/Spinner.jsx";
 
 function SearchResults() {
   const location = useLocation();
@@ -26,7 +27,16 @@ function SearchResults() {
     searchResultsLoader();
   }, [location.search]);
 
-  if (loading) return <h1>Loading</h1>;
+  if (loading)
+    return (
+      <Spinner
+        styles={{
+          gridRow: "2 / 3",
+          alignSelf: "center",
+          justifySelf: "center",
+        }}
+      />
+    );
 
   function handleRange(i, j) {
     setRange(results.slice(i, j));
@@ -61,7 +71,7 @@ const SearchMain = styled.main`
   overflow: scroll;
 
   h1 {
-  border-bottom: 0.75px solid;
+    border-bottom: 0.75px solid;
   }
 
   .title-container {

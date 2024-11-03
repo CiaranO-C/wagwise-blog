@@ -6,7 +6,7 @@ import { ModalContext } from "../../app/providers/ModalProvider.jsx";
 import AuthModal from "./modals/AuthModal";
 import { Button, ButtonHoverYellow } from "../../components/styles/styles.jsx";
 import { AuthContext } from "../../app/providers/AuthProvider.jsx";
-import { deleteToken } from "../../api/utils.js";
+import { deleteTokens } from "../../api/utils.js";
 import wagwiseLogo from "/assets/wagwise/wagwise-logo.png";
 
 function Header() {
@@ -33,7 +33,7 @@ function Header() {
                 </p>
                 <button
                   onClick={() => {
-                    deleteToken();
+                    deleteTokens();
                     setUser(null);
                   }}
                   className="logout"

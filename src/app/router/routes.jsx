@@ -8,12 +8,12 @@ import Error from '../routes/Error';
 import Home from "../routes/Home";
 import Landing from "../routes/Landing";
 import SearchResults from "../routes/SearchResults";
-import { articleLoader, categoryLoader } from "./loaders";
 
 const routesConfig = [
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         index: true,

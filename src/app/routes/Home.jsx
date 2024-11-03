@@ -7,7 +7,6 @@ import Divider from "../../features/home/divider/Divider";
 import MostPopular from "../../features/home/MostPopular";
 import Categories from "../../features/home/Categories";
 import { homeLoader } from "../router/loaders";
-import { MoonLoader } from "react-spinners";
 import Spinner from "../../components/Spinner";
 
 function Home() {

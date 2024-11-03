@@ -1,8 +1,7 @@
 import { API_URL } from "./utils";
 
-async function postComment(comment, articleId) {
+async function postComment(comment, articleId, token) {
   try {
-    const token = localStorage.getItem("accessToken");
     const res = await fetch(`${API_URL}/api/articles/${articleId}/comment`, {
       method: "POST",
       headers: {

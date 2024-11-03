@@ -22,6 +22,8 @@ function ArticleCard({ article }) {
       "&lt;": "<",
       "&gt;": ">",
       "&apos;": "'",
+      "&rsquo;": "'",
+      "&lsquo;": "'",
     };
 
     const converted = summary.replace(/&[a-zA-Z0-9#]+;/g, (match) => {
@@ -29,6 +31,9 @@ function ArticleCard({ article }) {
     });
     return converted;
   }
+
+  console.log(article);
+  
 
   return (
     <Card>
