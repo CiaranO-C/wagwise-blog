@@ -225,6 +225,7 @@ const Section = styled.section`
       }
 
       .requirements-container {
+        border: none;
         grid-row: 3 / 4;
         background-color: #9b9f7f;
         color: cornsilk;
@@ -251,7 +252,7 @@ const Section = styled.section`
         border: none;
         grid-row: 6 / 7;
         background-color: #9b9f7f;
-        color: white;
+        color: cornsilk;
       }
     }
   }
