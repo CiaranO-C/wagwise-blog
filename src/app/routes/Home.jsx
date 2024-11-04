@@ -98,7 +98,7 @@ const HomeMain = styled.main`
   position: relative;
   display: flex;
   flex-direction: column;
-  grid-row: 2 / 3;
+  grid-row: 2 / 4;
 `;
 
 const Content = styled.section`

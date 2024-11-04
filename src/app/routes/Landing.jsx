@@ -46,25 +46,25 @@ const LandingMain = styled.main`
     font-family: "Wix Madefor Text", sans-serif;
     flex: 1;
     max-width: 1200px;
+    gap: 20px;
 
     .text {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-right: 90px;
       user-select: none;
     }
 
     h1 {
       position: relative;
       left: -5px;
-      font-size: 5rem;
+      font-size: clamp(3rem, 6vw, 5rem);
       margin-bottom: 10px;
     }
 
     .frame {
       position: relative;
-      height: 50vh;
+      height: clamp(240px, 30vw, 400px);
 
       img {
         height: 100%;
@@ -93,6 +93,23 @@ const LandingMain = styled.main`
       margin-top: 20px;
       border: 1px solid black;
       transition: 0.25s ease-out;
+    }
+
+    @media (max-width: 610px) {
+      justify-content: center;
+
+      .text {
+        align-items: center;
+
+        h1,
+        p {
+          text-align: center;
+        }
+      }
+
+      .frame {
+        display: none;
+      }
     }
   }
 `;

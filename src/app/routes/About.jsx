@@ -6,7 +6,9 @@ import paws from "/assets/png/paws.png";
 function About() {
   return (
     <AboutMain>
-      <h1>About</h1>
+      <header>
+        <h1>About</h1>
+      </header>
       <p>
         At Wag Wise, we believe that every dog has the potential to be a well
         behaved, confident companion. Our mission is to strengthen the bond
@@ -27,8 +29,7 @@ const AboutMain = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
-  padding-bottom: 0px;
+  padding: 0px 30px;
   position: relative;
   overflow: hidden;
   gap: 30px;
@@ -54,8 +55,8 @@ const AboutMain = styled.main`
 
   .paws-one {
     right: 18px;
-    top: -75px;
-    transform: rotate(45deg);
+    top: -52px;
+    transform: rotate(30deg);
   }
 
   .paws-two {
@@ -64,29 +65,42 @@ const AboutMain = styled.main`
     transform: rotate(-157deg);
   }
 
-  h1,
-  p {
-    font-family: "Wix Madefor Text", sans-serif;
+  header {
+    background-color: #4e5040;
+    color: white;
+    width: 100vw;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
   }
 
   h1 {
-    font-size: 4rem;
+    text-align: center;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    font-size: 3.5rem;
+    font-weight: 200;
+    padding-bottom: 10px;
+    border-bottom: 0.75px solid;
   }
 
   p {
     text-align: center;
     letter-spacing: 0.5px;
     line-height: 1.5;
-    font-size: 1.2rem;
-    width: clamp(531px, 90%, 936px);
+    font-size: clamp(1rem, 2vw, 1.2rem);
     border: 0.75px solid;
     padding: 30px;
     border-radius: 40px;
     box-shadow:
       rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
       rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-    background-color: #b6c471;
+    background-color: cornsilk;
     z-index: 1;
+    max-width: 935px;
+    margin: auto 20px;
   }
 `;
 
