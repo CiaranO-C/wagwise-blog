@@ -8,6 +8,7 @@ import { Button, ButtonHoverYellow } from "../../components/styles/styles.jsx";
 import { AuthContext } from "../../app/providers/AuthProvider.jsx";
 import { deleteTokens } from "../../api/utils.js";
 import wagwiseLogo from "/assets/wagwise/wagwise-logo.png";
+import MenuIcon from "./MenuIcon.jsx";
 
 function Header() {
   const { modal, setModal } = useContext(ModalContext);
@@ -22,8 +23,10 @@ function Header() {
             <img src={wagwiseLogo} alt="wagwise logo" />
           </Link>
           <HeaderButtons>
-            <NavLink to="/home">Home</NavLink>
-            <NavLink to="/about">About</NavLink>
+            <div className="navlink-container">
+              <NavLink to="/home">Home</NavLink>
+              <NavLink to="/about">About</NavLink>
+            </div>
             <div className="divider" />
             {user ? (
               <>
@@ -52,9 +55,11 @@ function Header() {
               </>
             )}
           </HeaderButtons>
+          <MenuIcon />
         </div>
         <HeaderTrim />
       </MainHeader>
+
       {modal && createPortal(<AuthModal />, document.body)}
     </>
   );
@@ -89,8 +94,23 @@ const MainHeader = styled.header`
     background-color: #b8c671;
   }
 
+  .navlink-container {
+    display: flex;
+    gap: 15px;
+
+    @media (max-width: 700px) {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  a {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+  }
+
   .home-link {
     position: relative;
+    margin-right: 60px;
   }
 
   .sun {
@@ -147,6 +167,8 @@ const HeaderButtons = styled.div`
 
   button {
     ${Button}
+
+    font-size: clamp(0.8rem, 2vw, 1rem);
   }
 
   .sign-in {
@@ -172,6 +194,10 @@ const HeaderButtons = styled.div`
 
   .active {
     border-color: black;
+  }
+
+  @media (max-width: 635px) {
+    display: none;
   }
 `;
 

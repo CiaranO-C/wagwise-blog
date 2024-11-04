@@ -167,6 +167,7 @@ function AuthForm() {
 
   function handleGuest() {
     setFormData({ username: "Guest", password: "guestPass1" });
+    setErrors({});
     setTimeout(() => {
       if (guestRef.current) {
         guestRef.current.click();
