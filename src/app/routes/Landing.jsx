@@ -37,6 +37,7 @@ const LandingMain = styled.main`
   justify-content: center;
   background-color: #b8c671;
   padding: 20px;
+  max-height: calc(100vh - 160px);
 
   .content {
     display: flex;
