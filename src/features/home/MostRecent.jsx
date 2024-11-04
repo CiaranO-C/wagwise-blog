@@ -24,7 +24,7 @@ const Section = styled.section`
   height: 400px;
 
   h1 {
-    margin: 20px 20px 0px;
+    margin: 30px 20px 0px;
     border-bottom: 0.75px solid;
     font-size: clamp(1.3rem, 4vw, 2rem);
   }
@@ -41,6 +41,7 @@ const Section = styled.section`
     /* override default article card styles */
     & > div {
       padding: 20px;
+      padding-bottom: 30px;
     }
 
     h3 {
