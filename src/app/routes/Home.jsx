@@ -42,11 +42,11 @@ function Home() {
       controller.abort();
     };
   });
-
+  //[...heights].sort()
   const mostPopular = useMemo(() => {
     if (data) {
-      const popular = data.articles
-        .toSorted((a, b) => b._count.likes - a._count.likes)
+      const popular = [...data.articles]
+        .sort((a, b) => b._count.likes - a._count.likes)
         .slice(0, popularCount);
       return popular;
     }
@@ -54,7 +54,7 @@ function Home() {
 
   const topTags = useMemo(() => {
     if (data) {
-      const top = data.tags.toSorted(
+      const top = [...data.tags].sort(
         (a, b) => b._count.articles - a._count.articles,
       );
       return top;
@@ -84,7 +84,11 @@ function Home() {
       <HomeMain>
         <Content>
           <MostRecent article={data.articles[0]} />
-          <Divider openSearch={openSearch} mostRecent={data.articles[0].id} commented={recentlyCommentedId} />
+          <Divider
+            openSearch={openSearch}
+            mostRecent={data.articles[0].id}
+            commented={recentlyCommentedId}
+          />
           <Categories tags={topTags} />
           <MostPopular articles={mostPopular} />
         </Content>
