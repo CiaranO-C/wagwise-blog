@@ -44,7 +44,7 @@ function App() {
 const Layout = styled.main`
   display: grid;
   grid-template-rows: 120px 1fr 40px;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export default App;

@@ -11,8 +11,16 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
 
-  * {
+  button,
+  .button {
     transform: translateY(-50%);
+    font-family: inherit;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  * {
+    font-size: clamp(0.8rem, 3vw, 1rem);
   }
 `;
 

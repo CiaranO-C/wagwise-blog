@@ -24,10 +24,10 @@ const Item = styled(Link)`
 
     /* override default article card styles */
     & > div {
-      padding: 30px 45px;
       background-color: #4e5040;
       color: white;
       border-radius: 0px;
+      padding: 30px 50px;
     }
 
     h3 {
@@ -42,6 +42,16 @@ const Item = styled(Link)`
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+  }
+
+  @media only screen and (max-width: 960px) {
+    .frame {
+      display: none;
+    }
+
+    .info {
+      flex-direction: column;
+    }
   }
 `;
 

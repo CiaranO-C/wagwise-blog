@@ -30,6 +30,10 @@ main {
   background-color: #b8c671;
 }
 
+img {
+  pointer-events: none;
+}
+
 body,
 #root {
   min-width: 320px;

@@ -115,7 +115,7 @@ const Section = styled.section`
   .slider {
     display: flex;
     transition: transform 0.5s ease;
-    width: 300%;
+    width: 100%;
 
     &.index0 {
       transform: translateX(0%);
@@ -170,6 +170,11 @@ const Section = styled.section`
     right: 0;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    grid-column: 1 / 5;
+    grid-row: 4 / 5;
   }
 `;
 export default MostPopular;

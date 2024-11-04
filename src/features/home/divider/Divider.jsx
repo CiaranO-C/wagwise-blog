@@ -18,7 +18,10 @@ function Divider({ openSearch, mostRecent, commented }) {
         </Link>
       </ButtonContainer>
       <ButtonContainer>
-        <button onClick={openSearch}>Search for something else</button>
+        <button onClick={openSearch}>
+          Search <span>for something else?</span>
+          <span>article</span>
+        </button>
       </ButtonContainer>
       <Hottest id={commented} comments={article ? article.comments : []} />
       <LookBelow />
@@ -57,6 +60,10 @@ const Section = styled.section`
     ${ButtonHoverYellow}
   }
 
+  button span:nth-child(2) {
+    display: none;
+  }
+
   .content {
     flex: 1;
     display: flex;
@@ -65,6 +72,16 @@ const Section = styled.section`
 
     h2 {
       font-size: clamp(20px, 5vw, 2rem);
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    button span:nth-child(1) {
+      display: none;
+    }
+
+    button span:nth-child(2) {
+      display: inline;
     }
   }
 `;

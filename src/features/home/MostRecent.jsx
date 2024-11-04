@@ -9,9 +9,7 @@ function MostRecent({ article }) {
         <h1>Most recent article:</h1>
         <ArticleCard article={article} />
       </div>
-      <div
-        className="frame"
-      />
+      <div className="frame" />
     </Section>
   );
 }
@@ -19,7 +17,7 @@ function MostRecent({ article }) {
 const Section = styled.section`
   grid-column: 1 / -1;
   grid-row: 1 / 2;
-  
+
   display: flex;
   background-color: cornsilk;
   overflow: hidden;
@@ -28,7 +26,7 @@ const Section = styled.section`
   h1 {
     margin: 20px 20px 0px;
     border-bottom: 0.75px solid;
-    font-size: 2rem;
+    font-size: clamp(1.3rem, 4vw, 2rem);
   }
 
   div {
@@ -48,6 +46,12 @@ const Section = styled.section`
     h3 {
       border-bottom: none;
       min-height: 0px;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+    }
+
+    p,
+    span {
+      font-size: clamp(0.8em, 2vw, 1em);
     }
   }
 
@@ -58,6 +62,10 @@ const Section = styled.section`
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+
+    @media only screen and (max-width: 545px) {
+      display: none;
+    }
   }
 `;
 

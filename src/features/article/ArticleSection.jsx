@@ -39,7 +39,7 @@ const Section = styled.section`
 
   .body {
     max-width: 1290px;
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    /*font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;*/
     display: grid;
     padding-top: 40px;
     grid-template-columns: 1fr 1fr;
@@ -50,6 +50,10 @@ const Section = styled.section`
       rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px,
       rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+    * {
+      font-family: inherit;
+    }
 
     h3 {
       font-weight: 300;
@@ -64,7 +68,7 @@ const Section = styled.section`
       justify-self: center;
       line-height: 1.4;
       font-size: 1.1rem;
-      padding-bottom: 35px;
+      padding: 0px 20px 35px;
     }
 
     .reasoning-container,
@@ -207,6 +211,47 @@ const Section = styled.section`
       p {
         max-width: 85ch;
         font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
+    .body {
+      .reasoning-container,
+      .requirements-container,
+      .guide-container,
+      .challenges-container,
+      .tips-container {
+        grid-column: 1 / -1;
+      }
+
+      .requirements-container {
+        grid-row: 3 / 4;
+        background-color: #9b9f7f;
+        color: cornsilk;
+      }
+
+      .guide-container {
+        grid-row: 4 / 5;
+        padding: 30px 20px 45px;
+
+        &::before {
+          content: none;
+        }
+
+        ol {
+          display: block;
+        }
+      }
+
+      .challenges-container {
+        grid-row: 5 / 6;
+      }
+
+      .tips-container {
+        grid-row: 6 / 7;
+        background-color: #9b9f7f;
+        color: white;
       }
     }
   }

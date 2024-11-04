@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Categories({ tags }) {
@@ -36,6 +36,7 @@ const Div = styled.div`
     padding: 5px 20px;
     transition: 0.3s ease-out;
     cursor: pointer;
+    border-bottom: none;
   }
 
   .tag:hover {
@@ -46,6 +47,15 @@ const Div = styled.div`
 
   .tag + .tag {
     border-top: 0.75px solid;
+  }
+
+  @media only screen and (max-width: 600px) {
+    grid-column: 1 / 5;
+    grid-row: 3 / 4;
+
+    h1 {
+      padding-bottom: 30px;
+    }
   }
 `;
 

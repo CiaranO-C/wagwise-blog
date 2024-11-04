@@ -24,11 +24,13 @@ function RelatedCategories({ current, articles }) {
       {RelatedCategories.length > 0 && (
         <RelatedContainer>
           <h2>Related Categories</h2>
-          {RelatedCategories.map((name, index) => (
-            <Link to={`/category/${name[0]}`} key={index}>
-              {name[0]}
-            </Link>
-          ))}
+          <div className="related-list">
+            {RelatedCategories.map((name, index) => (
+              <Link to={`/category/${name[0]}`} key={index}>
+                {name[0]}
+              </Link>
+            ))}
+          </div>
         </RelatedContainer>
       )}
       <SearchButton onClick={openSearch}>
@@ -66,9 +68,17 @@ const RelatedContainer = styled.div`
   padding: 20px;
 
   h2 {
-  border-right: 0.75px solid;
-  padding-right: 20px;
-  margin-right: 20px;
+    border-right: 0.75px solid;
+    padding-right: 20px;
+    margin-right: 20px;
+    width: min-content;
+  }
+
+  .related-list {
+    height: 100%;
+    overflow-x: scroll;
+    display: flex;
+    align-items: center;
   }
 
   a {
@@ -76,12 +86,12 @@ const RelatedContainer = styled.div`
     border: transparent;
 
     &:hover {
-    border-bottom: 0.75px solid;
+      border-bottom: 0.75px solid;
     }
   }
 
   a + a {
-  margin-left: 15px;
+    margin-left: 15px;
   }
 `;
 
