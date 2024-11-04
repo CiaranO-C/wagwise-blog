@@ -35,10 +35,10 @@ function MenuIcon() {
       </MenuBtn>
       <MenuList className={open ? "open" : ""}>
         {user && <h2>Welcome back, {user.username}</h2>}
-        <Link onClick={handleLinkClick} to="/home">
+        <Link className='nav' onClick={handleLinkClick} to="/home">
           Home
         </Link>
-        <Link onClick={handleLinkClick} to="/about">
+        <Link className='nav' onClick={handleLinkClick} to="/about">
           About
         </Link>
         <div className="auth-buttons">
@@ -86,9 +86,9 @@ const MenuList = styled.div`
   transform-origin: right;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 120px);
   right: 0;
   top: 120px;
+  bottom: 0;
   width: 200px;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
 
@@ -99,7 +99,7 @@ const MenuList = styled.div`
     color: white;
   }
 
-  a {
+  .nav {
     color: white;
     padding: 20px;
     font-size: 1rem;
