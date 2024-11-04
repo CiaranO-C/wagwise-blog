@@ -34,7 +34,9 @@ function App() {
 
   //fix pages rendering slightly scrolled down on mobile
   useEffect(() => {
-    window.scrollTo(0, 0);
+    console.log(pathname);
+    location = pathname === "/" ? document.body.scrollHeight : 0;
+    window.scrollTo(0, location);
   }, [pathname]);
 
   return (
