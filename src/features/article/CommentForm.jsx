@@ -61,6 +61,8 @@ const Form = styled.form`
   }
 
   input {
+    font-size: 16px;
+    font-family: inherit;
     max-width: 30%;
     min-width: 245px;
     overflow-x: scroll;
