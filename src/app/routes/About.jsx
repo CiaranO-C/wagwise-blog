@@ -25,6 +25,7 @@ function About() {
 }
 
 const AboutMain = styled.main`
+  max-height: calc(100vh - 120px);
   grid-row: 2 / 4;
   display: flex;
   flex-direction: column;
