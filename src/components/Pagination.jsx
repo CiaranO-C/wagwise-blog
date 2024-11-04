@@ -96,6 +96,7 @@ const PageNumContainer = styled.div`
   margin-bottom: 20px;
 
   button {
+    color: black;
     cursor: pointer;
 
     &:disabled {
@@ -132,7 +133,7 @@ const PageNumContainer = styled.div`
     }
 
     &:not(:disabled):hover svg {
-    background-color: #f9d23f;
+      background-color: #f9d23f;
     }
   }
 `;
