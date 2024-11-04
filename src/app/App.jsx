@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../features/header/Header.jsx";
 import styled from "styled-components";
 import { ModalProvider } from "./providers/ModalProvider.jsx";
@@ -9,6 +9,7 @@ import { getToken } from "../api/utils.js";
 
 function App() {
   const { user, setUser } = useContext(AuthContext);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -30,6 +31,11 @@ function App() {
       controller.abort();
     };
   }, [user, setUser]);
+
+  //fix pages rendering slightly scrolled down on mobile
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <ModalProvider>
