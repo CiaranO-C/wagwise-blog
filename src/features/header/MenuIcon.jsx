@@ -88,7 +88,7 @@ const MenuList = styled.div`
   flex-direction: column;
   height: calc(100vh - 120px);
   right: 0;
-  bottom: 0;
+  top: 120px;
   width: 200px;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
 
@@ -96,7 +96,6 @@ const MenuList = styled.div`
     border-bottom: 0.75px solid #b8c671;
     padding: 10px 20px;
     font-size: 1.3rem;
-    background-color: #4e5040;
     color: white;
   }
 
