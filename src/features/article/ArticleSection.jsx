@@ -39,7 +39,6 @@ const Section = styled.section`
 
   .body {
     max-width: 1290px;
-    /*font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;*/
     display: grid;
     padding-top: 40px;
     grid-template-columns: 1fr 1fr;
@@ -249,6 +248,7 @@ const Section = styled.section`
       }
 
       .tips-container {
+        border: none;
         grid-row: 6 / 7;
         background-color: #9b9f7f;
         color: white;
