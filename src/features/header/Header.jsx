@@ -17,47 +17,55 @@ function Header() {
   return (
     <>
       <MainHeader>
-        <div className="header-content">
-          <Link className="home-link" to="/">
-            <div className="sun" />
-            <img src={wagwiseLogo} alt="wagwise logo" />
-          </Link>
-          <HeaderButtons>
-            <div className="navlink-container">
-              <NavLink to="/home">Home</NavLink>
-              <NavLink to="/about">About</NavLink>
-            </div>
-            <div className="divider" />
-            {user ? (
-              <>
-                <p>
-                  Welcome back,{" "}
-                  <span className="username">{user.username}</span>
-                </p>
-                <button
-                  onClick={() => {
-                    deleteTokens();
-                    setUser(null);
-                  }}
-                  className="logout"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <button className="sign-in" onClick={() => setModal("signIn")}>
-                  Sign in
-                </button>
-                <button className="sign-up" onClick={() => setModal("signUp")}>
-                  Get Wise
-                </button>
-              </>
-            )}
-          </HeaderButtons>
-          <MenuIcon />
+        <div className="overflow">
+          <div className="header-content">
+            <Link className="home-link" to="/">
+              <div className="sun" />
+              <img src={wagwiseLogo} alt="wagwise logo" />
+            </Link>
+            <HeaderButtons>
+              <div className="navlink-container">
+                <NavLink to="/home">Home</NavLink>
+                <NavLink to="/about">About</NavLink>
+              </div>
+              <div className="divider" />
+              {user ? (
+                <>
+                  <p>
+                    Welcome back,{" "}
+                    <span className="username">{user.username}</span>
+                  </p>
+                  <button
+                    onClick={() => {
+                      deleteTokens();
+                      setUser(null);
+                    }}
+                    className="logout"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="sign-in"
+                    onClick={() => setModal("signIn")}
+                  >
+                    Sign in
+                  </button>
+                  <button
+                    className="sign-up"
+                    onClick={() => setModal("signUp")}
+                  >
+                    Get Wise
+                  </button>
+                </>
+              )}
+            </HeaderButtons>
+            <MenuIcon />
+          </div>
+          <HeaderTrim />
         </div>
-        <HeaderTrim />
       </MainHeader>
 
       {modal && createPortal(<AuthModal />, document.body)}
@@ -66,17 +74,22 @@ function Header() {
 }
 
 const MainHeader = styled.header`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background-color: #b6c471;
-  overflow: hidden;
-  padding: 0px 20px;
   height: 120px;
   z-index: 3;
   position: fixed;
   width: 100vw;
   top: 0;
+
+  .overflow {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    overflow: hidden;
+    position: absolute;
+  }
 
   &,
   & * {

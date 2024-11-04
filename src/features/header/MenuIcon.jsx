@@ -80,8 +80,7 @@ const Container = styled.div`
 
 const MenuList = styled.div`
   position: fixed;
-
-  transform: scaleX(0);
+  transform: translateX(100%);
   transition: transform 0.3s ease-in;
   background-color: #899648;
   transform-origin: right;
@@ -122,7 +121,7 @@ const MenuList = styled.div`
 
   &.open {
     transition: transform 0.5s;
-    transform: scaleX(1);
+    transform: translateX(0%);
 
     & > * {
       animation: ${FadeIn} 0.3s 0.5s forwards;
