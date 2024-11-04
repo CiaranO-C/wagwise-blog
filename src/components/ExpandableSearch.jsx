@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { IoSearchOutline } from "react-icons/io5";
+
 import Search from "./Searchbar";
 import { FadeIn } from "./styles/animation";
 
@@ -24,7 +26,7 @@ function ExpandableSearch({ intialPosition, buttonRef }) {
         onClick={() => setOpen((o) => !o)}
         className={open ? "toggle open" : "toggle"}
       >
-        {open ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        {open ? <IoIosArrowUp /> : <IoSearchOutline />}
       </button>
     </Header>
   );
@@ -86,9 +88,20 @@ const Header = styled.header`
     border-bottom-right-radius: 10px;
     border-bottom: 1px solid;
     z-index: 3;
+    color: black;
 
     svg {
       pointer-events: none;
+      height: 18px;
+      width: 18px;
+    }
+
+    @media only screen and (max-width: 500px){
+    padding: 2px 10px;
+    border-bottom-left-radius: 0px;
+    margin-left: 0;
+
+
     }
   }
 
