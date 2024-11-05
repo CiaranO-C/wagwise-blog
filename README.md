@@ -28,4 +28,5 @@ Users can easily access the search bar from most pages within the app via clicki
 ![auth GIF](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3luYWw0cG5qdTk4bzZtaXliNTBkdmdtOXd3OG5hc2VoOTY0OWR1ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wwx54aVzwFlL5CHgXN/giphy.gif)  
 With the use of React portals and modals, users are able to both sign up and login from any page without the need to navigate to other routes. Giving them access to features such as commenting and liking articles.  
 ### Responsive Design  
-<img src="https://imgur.com/loEry5W.png" alt="Phone view" />
+![device-views](https://github.com/user-attachments/assets/0e584c26-9cca-4df6-8a3f-4a9404ad0fad)
+Responsive design ensures a smooth experience for users no matter their device.  
