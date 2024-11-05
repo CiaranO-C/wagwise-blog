@@ -22,9 +22,24 @@ $ cd wagwise-blog
 
 # Install dependencies
 $ npm install
+```
 
-# Run the dev environment
-$ npm run dev
+### Usage  
+To start the app in Vites dev mode run:  
+`npm run dev`  
+
+### Environment variables  
+create the following two Vite env files  
+`.env.local`  
+`.env.production`  
+
+each file should contain the following variables:   
+```
+# replace this with your own production/local url
+VITE_API_URL=https://wagwise.com
+
+# replace with your own desired port numbers
+VITE_PORT=5175 
 ```
 ## 🔎 Features
 ### Article Search
@@ -35,4 +50,16 @@ Users can easily access the search bar from most pages within the app via clicki
 With the use of React portals and modals, users are able to both sign up and login from any page without the need to navigate to other routes. Giving them access to features such as commenting and liking articles.  
 ### Responsive Design  
 ![device-views](https://github.com/user-attachments/assets/0e584c26-9cca-4df6-8a3f-4a9404ad0fad)
-Responsive design ensures a smooth experience for users no matter their device.  
+Responsive design through the use of media queries ensures a smooth experience for users no matter the size of their device. The above image displays how the application adapts across devices.
+## 🖇️ Credits
+This software uses the following packages:
+- [React](https://react.dev)
+- [ESLint](https://eslint.org)
+- [Vite](https://vite.dev)
+- [dompurify](https://github.com/cure53/DOMPurify)
+- [HTML React Parser](https://github.com/remarkablemark/html-react-parser#readme)
+- [JWT Decode](https://github.com/auth0/jwt-decode#readme)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Router](https://reactrouter.com/en/main)
+- [React Spinners](https://www.davidhu.io/react-spinners/)
+- [Styled Components](https://styled-components.com)
