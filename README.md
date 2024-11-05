@@ -1,3 +1,6 @@
+
+![wagwise-header](https://github.com/user-attachments/assets/c0db8458-1332-41d2-adbe-1d8c3ad83791)
+
 ## 🐕 Introduction
 Welcome to Wag Wise, a blog for dog training tips and techniques! Built using React and JavaScript, this site allows users to view and interact with articles, post comments, and explore dog training resources.
 ## ⚙️ Backend
