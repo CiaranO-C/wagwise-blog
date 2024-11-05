@@ -17,7 +17,7 @@ function Categories({ tags }) {
 const Div = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px 0px;
+  padding: 30px 0px 0px;
   background-color: cornsilk;
 
   h1 {
@@ -37,6 +37,8 @@ const Div = styled.div`
     transition: 0.3s ease-out;
     cursor: pointer;
     border-bottom: none;
+    flex: 1;
+    min-height: 45px;
   }
 
   .tag:hover {
