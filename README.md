@@ -52,7 +52,7 @@ With the use of React portals and modals, users are able to both sign up and log
 ![device-views](https://github.com/user-attachments/assets/0e584c26-9cca-4df6-8a3f-4a9404ad0fad)
 Responsive design through the use of media queries ensures a smooth experience for users no matter the size of their device. The above image displays how the application adapts across devices.
 ## 🖇️ Credits
-This software uses the following packages:
+This software uses the following dependencies:
 - [React](https://react.dev)
 - [ESLint](https://eslint.org)
 - [Vite](https://vite.dev)
