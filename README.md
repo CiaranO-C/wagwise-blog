@@ -3,10 +3,13 @@
 
 ## 🐕 Introduction
 Welcome to Wag Wise, a blog for dog training tips and techniques! Built using React and JavaScript, this site allows users to view and interact with articles, post comments, and explore dog training resources.
+### Visit Wag Wise!
+[https://wagwise-blog.vercel.app/](https://wagwise-blog.vercel.app/)
+
 ## ⚙️ Backend
 The source code for the api can be found here: [Wag Wise API](https://github.com/CiaranO-C/WagWise)
 ## 🔧 Content Management System 
-The source code for the Admin CMS front-end can be found here: [Wag Wise CMS](https://github.com/CiaranO-C/wagwise-cms)
+The source code for the CMS front-end can be found here: [Wag Wise CMS](https://github.com/CiaranO-C/wagwise-cms)
 ## ⬇️ Installation
 To clone and run locally you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/package-manager)(which comes with npm) installed.
 enter the following in your command line:
