@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 
 import Search from "./Searchbar";
@@ -9,6 +9,26 @@ import { FadeIn } from "./styles/animation";
 function ExpandableSearch({ intialPosition, buttonRef }) {
   const [open, setOpen] = useState(intialPosition);
   const inputRef = useRef(null);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside({ target }) {
+      //close menu if user clicks anywhere outside
+      if (headerRef.current && !headerRef.current.contains(target)) {
+        setOpen(false);
+      }
+    }
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   useEffect(() => {
     if (inputRef?.current && open) {
@@ -17,7 +37,7 @@ function ExpandableSearch({ intialPosition, buttonRef }) {
   }, [open]);
 
   return (
-    <Header className={open ? "mainOpen" : "closed"}>
+    <Header ref={headerRef} className={open ? "mainOpen" : "closed"}>
       <div className={open ? "content open" : "content"}>
         <Search inputRef={inputRef} />
       </div>
@@ -96,12 +116,10 @@ const Header = styled.header`
       width: 18px;
     }
 
-    @media only screen and (max-width: 500px){
-    padding: 2px 10px;
-    border-bottom-left-radius: 0px;
-    margin-left: 0;
-
-
+    @media only screen and (max-width: 500px) {
+      padding: 2px 10px;
+      border-bottom-left-radius: 0px;
+      margin-left: 0;
     }
   }
 

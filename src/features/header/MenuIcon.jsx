@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { ExpandFromTop, FadeIn } from "../../components/styles/animation";
+import { FadeIn } from "../../components/styles/animation";
 import { AuthContext } from "../../app/providers/AuthProvider";
 import { ModalContext } from "../../app/providers/ModalProvider";
 import { Link } from "react-router-dom";
@@ -8,8 +8,32 @@ import { deleteTokens } from "../../api/utils";
 
 function MenuIcon() {
   const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
   const { user, setUser } = useContext(AuthContext);
   const { setModal } = useContext(ModalContext);
+
+  useEffect(() => {
+    function handleClickOutside({ target }) {
+      //close menu if user clicks anywhere outside
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(target) &&
+        target.id !== "menuBtn"
+      ) {
+        setOpen(false);
+      }
+    }
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   function handleButtonClick({ target }) {
     const { id: modalType } = target;
@@ -25,7 +49,7 @@ function MenuIcon() {
 
   return (
     <Container>
-      <MenuBtn onClick={() => setOpen((o) => !o)}>
+      <MenuBtn id="menuBtn" onClick={() => setOpen((o) => !o)}>
         <div id="top" className={open ? `line open` : "line"} />
         <div className="mid">
           <div className={open ? `line open` : "line"} />
@@ -33,12 +57,12 @@ function MenuIcon() {
         </div>
         <div id="bottom" className={open ? `line open` : "line"} />
       </MenuBtn>
-      <MenuList className={open ? "open" : ""}>
+      <MenuList ref={menuRef} className={open ? "open" : ""}>
         {user && <h2>Welcome back, {user.username}</h2>}
-        <Link className='nav' onClick={handleLinkClick} to="/home">
+        <Link className="nav" onClick={handleLinkClick} to="/home">
           Home
         </Link>
-        <Link className='nav' onClick={handleLinkClick} to="/about">
+        <Link className="nav" onClick={handleLinkClick} to="/about">
           About
         </Link>
         <div className="auth-buttons">
@@ -181,6 +205,7 @@ const MenuBtn = styled.button`
   .mid {
     width: 100%;
     height: 3px;
+    pointer-events: none;
   }
 
   .line {
