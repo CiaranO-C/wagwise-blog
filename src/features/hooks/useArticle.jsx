@@ -23,7 +23,7 @@ function useArticle(articleId) {
       }
     }
 
-    if (!article) {
+    if (!article && articleId) {
       fetchArticle();
     }
 
