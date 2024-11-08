@@ -22,11 +22,10 @@ function ArticlesSection({ articles }) {
 }
 
 const Section = styled.section`
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 0px 20px
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px;
 `;
 
 export default ArticlesSection;
