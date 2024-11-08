@@ -7,7 +7,7 @@ import { getToken } from "../../api/utils";
 import { AuthContext } from "../../app/providers/AuthProvider";
 import { ModalContext } from "../../app/providers/ModalProvider";
 
-function CommentForm({ handleNewComment, removeRecentComment }) {
+function CommentForm({ handleNewComment, removeComment }) {
   const { id: articleId } = useParams();
   const [comment, setComment] = useState("");
   const { setUser } = useContext(AuthContext);
@@ -16,17 +16,17 @@ function CommentForm({ handleNewComment, removeRecentComment }) {
   async function handlePostComment(e) {
     e.preventDefault();
     if (comment) {
-      handleNewComment(comment);
+      const newId = handleNewComment(comment);
       setComment("");
       const { token, error } = await getToken();
       if (error === "badTokens") {
         setUser(null);
         setModal("signIn");
-        removeRecentComment();
+        removeComment(newId);
         return;
       }
       const posted = await postComment(comment, articleId, token);
-      if (posted.error) return removeRecentComment();
+      if (posted.error) return removeComment(newId);
     }
   }
 

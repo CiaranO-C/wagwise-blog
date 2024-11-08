@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Comment from "./Comment";
 
-function CommentList({ comments }) {
+function CommentList({ comments, handleDelete }) {
   return (
     <List>
       {comments.length ? (
         comments.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
+          <Comment key={comment.id} comment={comment} handleDelete={handleDelete}/>
         ))
       ) : (
         <p>No comments yet</p>

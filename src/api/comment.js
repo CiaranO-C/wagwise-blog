@@ -15,7 +15,6 @@ async function postComment(comment, articleId, token) {
     if (!res.ok) return { posted: false, error: res.status };
 
     const { comment: posted } = await res.json();
-    console.log(posted);
 
     return { posted, error: null };
   } catch (error) {
@@ -23,4 +22,24 @@ async function postComment(comment, articleId, token) {
   }
 }
 
-export { postComment };
+async function deleteComment(id, token) {
+  try {
+    const res = await fetch(`${API_URL}/api/user/comments/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) return { deleted: false, error: res.status };
+
+    const { deleted } = await res.json();
+
+    return { deleted, error: null };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { postComment, deleteComment };

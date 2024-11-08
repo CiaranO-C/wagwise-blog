@@ -4,26 +4,48 @@ import CommentList from "./CommentList";
 import { AuthContext } from "../../app/providers/AuthProvider";
 import styled from "styled-components";
 import { ModalContext } from "../../app/providers/ModalProvider";
+import { deleteComment } from "../../api/comment";
+import { getToken } from "../../api/utils";
 
 function CommentSection({ initialComments }) {
   const { setModal } = useContext(ModalContext);
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [comments, setComments] = useState(initialComments);
 
   function handleNewComment(comment) {
+    const id = crypto.randomUUID();
     setComments((prev) => [
       {
-        id: crypto.randomUUID(),
+        id,
         text: comment,
         author: { username: user.username },
         created: new Date().toISOString(),
       },
       ...prev,
     ]);
+
+    return id;
   }
 
-  function removeRecentComment() {
-    setComments((current) => current.slice(1));
+  function removeComment(id) {
+    setComments((current) => current.filter((comment) => comment.id !== id));
+  }
+
+  function restoreComment(comment) {
+    setComments((prev) => [comment, ...prev]);
+  }
+
+  async function handleDeleteComment(comment) {
+    removeComment(comment.id);
+    const { token, error } = await getToken();
+    if (error === "badTokens") {
+      setUser(null);
+      setModal("signIn");
+      restoreComment(comment);
+      return;
+    }
+    const deleted = await deleteComment(comment.id, token);
+    if (deleted.error) return restoreComment(comment);
   }
 
   return (
@@ -38,10 +60,10 @@ function CommentSection({ initialComments }) {
       {user && (
         <CommentForm
           handleNewComment={handleNewComment}
-          removeRecentComment={removeRecentComment}
+          removeComment={removeComment}
         />
       )}
-      <CommentList comments={comments} />
+      <CommentList comments={comments} handleDelete={handleDeleteComment} />
     </Section>
   );
 }
@@ -65,12 +87,14 @@ const Section = styled.section`
   .joinBtn {
     font-size: 1.2rem;
     background-color: black;
-    transition: background 0.3s ease-out, border 0.3s ease-out;
+    transition:
+      background 0.3s ease-out,
+      border 0.3s ease-out;
     cursor: pointer;
 
     &:hover {
-    background-color: #f9d23f;
-    color: black;
+      background-color: #f9d23f;
+      color: black;
     }
   }
 `;
