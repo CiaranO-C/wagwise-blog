@@ -68,7 +68,7 @@ const Div = styled.div`
     width: 90px;
     height: 100%;
 
-    @media screen and (max-width: 1150px) {
+    @media screen and (max-width: 1260px) {
       & {
         display: none;
       }
@@ -114,6 +114,7 @@ const Div = styled.div`
     align-items: center;
     position: relative;
     gap: 5px;
+    max-width: 35%;
 
     @media screen and (max-width: 845px) {
       & {
@@ -151,6 +152,7 @@ const Div = styled.div`
     align-self: start;
     padding-left: 5px;
     opacity: 0;
+    display: flex;
 
     animation:
       ${FadeIn} 0.3s ease-in forwards,
