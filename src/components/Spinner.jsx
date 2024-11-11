@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function Spinner({ styles }) {
   return (
-    <SpinnerWrapper style={styles}>
+    <SpinnerWrapper data-testid="spinner" style={styles}>
       <MoonLoader color="#f9d23f" />
     </SpinnerWrapper>
   );
