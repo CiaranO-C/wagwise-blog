@@ -49,9 +49,10 @@ function MostPopular({ articles }) {
           </h2>
         </div>
         <div className={`slider index${index}`}>
-          <CarouselItem article={articles[0]} dog={images.current[0]} />
-          <CarouselItem article={articles[1]} dog={images.current[1]} />
-          <CarouselItem article={articles[2]} dog={images.current[2]} />
+          {articles.length > 0 &&
+            articles.map((article, i) => (
+              <CarouselItem key={article.id} article={article} dog={images.current[i]} />
+            ))}
         </div>
       </div>
       <button onClick={handleNext} className="right">
