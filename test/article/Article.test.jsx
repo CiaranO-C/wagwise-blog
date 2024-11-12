@@ -1,5 +1,5 @@
 import { describe, expect, test, vi } from "vitest";
-import { mockArticles, mockUser } from "../home/mock-data";
+import { mockArticles, mockUser } from "../mocks/mock-data";
 import useArticle from "../../src/features/hooks/useArticle";
 import ArticlePage from "../../src/app/routes/ArticlePage";
 import Article from "../../src/features/article/Article";

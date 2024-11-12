@@ -5,7 +5,8 @@ import Landing from "../src/app/routes/Landing";
 import userEvent from "@testing-library/user-event";
 import Home from "../src/app/routes/Home";
 import { homeLoader } from "../src/app/router/loaders";
-import { mockArticles, mockTags } from './home/mock-data';
+import { mockArticles, mockTags } from "./mocks/mock-data";
+
 
 beforeAll(() => {
   window.scrollTo = vi.fn(); // Mock scrollTo

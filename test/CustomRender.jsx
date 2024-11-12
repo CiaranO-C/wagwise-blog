@@ -1,10 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { AuthProvider } from "../src/app/providers/AuthProvider";
 import { ModalProvider } from "../src/app/providers/ModalProvider";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
-import App from "../src/app/App"; // Update the path as needed
-import MockAuthProvider from "./home/MockAuthProvider";
+import App from "../src/app/App"; 
+import MockAuthProvider from "./mocks/MockAuthProvider";
 
 const ProvidersRouter = ({ children, initialEntries = ["/"], userState }) => {
   return (

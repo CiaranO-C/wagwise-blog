@@ -1,7 +1,7 @@
 import { test, vi } from "vitest";
-import { render, screen, waitFor } from "../CustomRender";
+import { render, screen } from "../CustomRender";
 import userEvent from "@testing-library/user-event";
-import { mockUser } from "../home/mock-data";
+import { mockUser } from "../mocks/mock-data";
 
 beforeAll(() => {
   window.scrollTo = vi.fn();

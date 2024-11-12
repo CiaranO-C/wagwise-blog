@@ -4,7 +4,7 @@ import { render, screen } from "../CustomRender";
 import { vi } from 'vitest';
 
 beforeAll(() => {
-  window.scrollTo = vi.fn(); // Mock scrollTo
+  window.scrollTo = vi.fn(); 
 });
 
 test("renders the About page", () => {

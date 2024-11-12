@@ -1,13 +1,13 @@
 import { describe, expect, vi, beforeAll, test } from "vitest";
 import { render, screen, waitFor, within } from "../CustomRender";
-import { Route, useParams } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Home from "../../src/app/routes/Home";
 import {
   mockArticles,
   mockCategory,
   mockTags,
   mockUser,
-} from "../home/mock-data";
+} from "../mocks/mock-data";
 import { categoryLoader, homeLoader } from "../../src/app/router/loaders";
 import userEvent from "@testing-library/user-event";
 import Article from "../../src/features/article/Article";
@@ -20,7 +20,9 @@ beforeAll(() => {
   window.scrollTo = vi.fn(); // Mock scrollTo
 });
 
-let articles, tags, user;
+let articles
+let tags
+let user;
 
 beforeEach(() => {
   articles = mockArticles(20);

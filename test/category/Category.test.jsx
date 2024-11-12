@@ -1,6 +1,6 @@
 import { test, vi } from "vitest";
 import { categoryLoader } from "../../src/app/router/loaders";
-import { mockCategory, mockTags } from "../home/mock-data";
+import { mockCategory, mockTags } from "../mocks/mock-data";
 import CategoryPage from "../../src/app/routes/CategoryPage";
 import Category from "../../src/features/category/Category";
 import { render, screen, waitFor } from "../CustomRender";
