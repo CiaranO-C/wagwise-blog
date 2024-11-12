@@ -1,33 +1,14 @@
-/*import React from "react";
-import { render } from "@testing-library/react";
-import { AuthProvider } from "../src/app/providers/AuthProvider";
-import { ModalProvider } from "../src/app/providers/ModalProvider";
-import routesConfig from '../src/app/router/routes';
-
-const AllTheProviders = ({ children }) => {
-  return (
-    <AuthProvider>
-      <ModalProvider>{children}</ModalProvider>
-    </AuthProvider>
-  );
-};
-
-const customRender = (ui, options = {}) =>
-  render(ui, { wrapper: AllTheProviders, ...options });
-
-export * from "@testing-library/react";
-export { customRender as render };*/
-
 import React from "react";
 import { render } from "@testing-library/react";
 import { AuthProvider } from "../src/app/providers/AuthProvider";
 import { ModalProvider } from "../src/app/providers/ModalProvider";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import App from "../src/app/App"; // Update the path as needed
+import MockAuthProvider from "./home/MockAuthProvider";
 
-const ProvidersRouter = ({ children, initialEntries = ["/"] }) => {
+const ProvidersRouter = ({ children, initialEntries = ["/"], userState }) => {
   return (
-    <AuthProvider>
+    <MockAuthProvider value={userState}>
       <ModalProvider>
         <MemoryRouter initialEntries={initialEntries}>
           <Routes>
@@ -37,14 +18,14 @@ const ProvidersRouter = ({ children, initialEntries = ["/"] }) => {
           </Routes>
         </MemoryRouter>
       </ModalProvider>
-    </AuthProvider>
+    </MockAuthProvider>
   );
 };
 
-const customRender = (ui, { initialEntries, ...options } = {}) =>
+const customRender = (ui, { initialEntries, userState, ...options } = {}) =>
   render(ui, {
     wrapper: (props) => (
-      <ProvidersRouter {...props} initialEntries={initialEntries} />
+      <ProvidersRouter {...props} initialEntries={initialEntries} userState={userState} />
     ),
     ...options,
   });
