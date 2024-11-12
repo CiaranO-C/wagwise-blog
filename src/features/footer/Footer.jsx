@@ -5,7 +5,7 @@ function Footer() {
   return (
     <MainFooter>
       <a
-        href="http://localhost:5173/login"
+        href="https://wagwise-cms.vercel.app/"
         target="_blank"
         rel="noopener noreferrer"
       >
