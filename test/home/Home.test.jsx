@@ -1,13 +1,20 @@
 import { describe, expect, vi, beforeAll, test } from "vitest";
 import { render, screen, waitFor, within } from "../CustomRender";
-import { Route } from "react-router-dom";
+import { Route, useParams } from "react-router-dom";
 import Home from "../../src/app/routes/Home";
-import { mockArticles, mockTags } from "../home/mock-data";
-import { homeLoader } from "../../src/app/router/loaders";
+import {
+  mockArticles,
+  mockCategory,
+  mockTags,
+  mockUser,
+} from "../home/mock-data";
+import { categoryLoader, homeLoader } from "../../src/app/router/loaders";
 import userEvent from "@testing-library/user-event";
 import Article from "../../src/features/article/Article";
 import ArticlePage from "../../src/app/routes/ArticlePage";
 import useArticle from "../../src/features/hooks/useArticle";
+import CategoryPage from "../../src/app/routes/CategoryPage";
+import Category from "../../src/features/category/Category";
 
 beforeAll(() => {
   window.scrollTo = vi.fn(); // Mock scrollTo
@@ -35,19 +42,17 @@ beforeEach(() => {
 
 vi.mock("../../src/app/router/loaders", () => ({
   homeLoader: vi.fn(),
+  categoryLoader: vi.fn(),
 }));
 
 vi.mock("../../src/features/hooks/useArticle", () => ({
   default: vi.fn(),
 }));
 
-function renderHome(articles, tags) {
-  /* homeLoader.mockResolvedValue({
-    articles,
-    tags,
-  });*/
+function renderHome(userState = null) {
   return render(<Route path="home" element={<Home />} />, {
     initialEntries: ["/home"],
+    userState,
   });
 }
 
@@ -192,7 +197,7 @@ describe("Home route user event tests", () => {
 
   test("User can click button to open expandable search", async () => {
     renderHome();
-    
+
     const openSearch = await screen.findByRole("button", {
       name: "Search for something else?",
     });
@@ -206,5 +211,103 @@ describe("Home route user event tests", () => {
     await user.click(openSearch);
 
     expect(searchContainer).toHaveClass("open");
+  });
+
+  test("Join conversation opens sign up for signed out user", async () => {
+    renderHome();
+
+    const joinInBtn = await screen.findByRole("button", {
+      name: "Get involved",
+    });
+
+    await user.click(joinInBtn);
+
+    expect(
+      await screen.findByRole("heading", {
+        name: "Join the Wag Wise community",
+      }),
+    ).toBeVisible();
+  });
+
+  test("Join conversation opens article for signed in user", async () => {
+    const mockedUser = mockUser();
+    let expectedArticle;
+    useArticle.mockImplementationOnce((articleId) => {
+      const article = articles.find(
+        (article) => article.id === Number(articleId),
+      );
+      expectedArticle = article;
+      return article;
+    });
+    render(
+      <>
+        <Route path="home" element={<Home />} />
+        <Route path="article" element={<ArticlePage />}>
+          <Route path=":id" element={<Article />} />
+        </Route>
+      </>,
+      {
+        initialEntries: ["/home"],
+        userState: mockedUser,
+      },
+    );
+
+    const joinInBtn = await screen.findByRole("button", {
+      name: "Get involved",
+    });
+
+    await user.click(joinInBtn);
+
+    await waitFor(() => {
+      expect(
+        screen.queryByRole("heading", {
+          name: "Join the Wag Wise community",
+        }),
+      ).not.toBeInTheDocument();
+
+      const { title, body, comments } = expectedArticle;
+      expect(screen.getByText(title)).toBeInTheDocument();
+      //html tags parsed in Article component, so strip p tags
+      expect(screen.getByText(body.replace(/<\/?p>/g, ""))).toBeInTheDocument();
+      comments.forEach((c) => {
+        expect(screen.getByText(c.text)).toBeInTheDocument();
+      });
+    });
+  });
+
+  test("User click on category opens category page", async () => {
+    const topCategory = tags
+      .slice()
+      .sort((a, b) => b._count.articles - a._count.articles)[0].tagName;
+    const mockedCategory = mockCategory(topCategory);
+    console.log("MOCKED CAT", mockedCategory);
+
+    categoryLoader.mockResolvedValue(mockedCategory);
+    render(
+      <>
+        <Route path="home" element={<Home />} />
+        <Route path="category" element={<CategoryPage />}>
+          <Route path=":name" element={<Category />} />
+        </Route>
+      </>,
+      {
+        initialEntries: ["/home"],
+      },
+    );
+    const categoryLink = await screen.findByRole("link", {
+      name: topCategory,
+    });
+
+    await user.click(categoryLink);
+
+    expect(
+      await screen.findByRole("heading", {
+        name: topCategory,
+      }),
+      screen.debug(undefined, 30000),
+    ).toBeVisible();
+    expect(
+      await screen.findByText(`total - ${mockedCategory.articles.length}`),
+    ).toBeVisible();
   });
 });
