@@ -18,8 +18,7 @@ function SearchResults() {
   useEffect(() => {
     async function searchResultsLoader() {
       const articles = await searchArticles(location.search);
-      console.log(articles);
-
+    
       setResults(articles);
       setRange(articles.slice(0, perPage));
       setLoading(false);

@@ -15,6 +15,7 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   const popularCount = 3;
+  const tagCount = 6;
 
   function openSearch() {
     if (openSearchRef.current) {
@@ -56,7 +57,7 @@ function Home() {
     if (data) {
       const top = [...data.tags].sort(
         (a, b) => b._count.articles - a._count.articles,
-      );
+      ).slice(0, tagCount);
       return top;
     }
   }, [data]);

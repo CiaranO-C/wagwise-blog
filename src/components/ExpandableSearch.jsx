@@ -38,7 +38,7 @@ function ExpandableSearch({ intialPosition, buttonRef }) {
 
   return (
     <Header ref={headerRef} className={open ? "mainOpen" : "closed"}>
-      <div className={open ? "content open" : "content"}>
+      <div data-testid="searchContainer" className={open ? "content open" : "content"}>
         <Search inputRef={inputRef} />
       </div>
       <button

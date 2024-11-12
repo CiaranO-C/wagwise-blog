@@ -22,6 +22,7 @@ function Search({ inputRef }) {
   return (
     <SearchForm onSubmit={handleSearch}>
       <input
+        type="search"
         ref={inputRef}
         onChange={({ target }) => setSearch(target.value)}
         name="query"
@@ -57,8 +58,8 @@ const SearchForm = styled.form`
     }
 
     &:focus {
-    outline: none;
-    border-color: black;
+      outline: none;
+      border-color: black;
     }
   }
 

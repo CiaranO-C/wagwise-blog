@@ -7,7 +7,6 @@ async function userLoader(signal, token) {
   );
   let user = initialUser;
   // unauthorized - invalid token
-  console.log("user loader status -> ", initialStatus);
 
   if (initialStatus === 401) {
     const refreshAccess = await refreshToken();

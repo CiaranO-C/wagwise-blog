@@ -20,8 +20,8 @@ beforeAll(() => {
   window.scrollTo = vi.fn(); // Mock scrollTo
 });
 
-let articles
-let tags
+let articles;
+let tags;
 let user;
 
 beforeEach(() => {
@@ -282,7 +282,6 @@ describe("Home route user event tests", () => {
       .slice()
       .sort((a, b) => b._count.articles - a._count.articles)[0].tagName;
     const mockedCategory = mockCategory(topCategory);
-    console.log("MOCKED CAT", mockedCategory);
 
     categoryLoader.mockResolvedValue(mockedCategory);
     render(
@@ -306,7 +305,6 @@ describe("Home route user event tests", () => {
       await screen.findByRole("heading", {
         name: topCategory,
       }),
-      screen.debug(undefined, 30000),
     ).toBeVisible();
     expect(
       await screen.findByText(`total - ${mockedCategory.articles.length}`),

@@ -1,8 +1,6 @@
 import { API_URL } from './utils';
 
 async function postLogin(username, password) {
-  console.log(API_URL);
-  
   const response = await fetch(`${API_URL}/api/user/log-in`, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },

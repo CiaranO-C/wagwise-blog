@@ -22,7 +22,6 @@ function isTokenExpired(token) {
   // Get current time in seconds
   const currentTime = Math.floor(Date.now() / 1000);
   const isExpired = exp < currentTime;
-  console.log("isExpired --> ", isExpired);
 
   return isExpired;
 }
@@ -54,7 +53,6 @@ async function refreshToken(signal) {
     const { jwt, refreshToken } = await res.json();
     storeToken(jwt);
     storeRefreshToken(refreshToken);
-    console.log("new tokens stored");
     return true;
   } catch (error) {
     if (error.name === "AbortError") {

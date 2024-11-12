@@ -32,9 +32,10 @@ function CommentForm({ handleNewComment, removeComment }) {
 
   return (
     <Form onSubmit={handlePostComment}>
-      <label htmlFor="comment">Post comment</label>
+      <label htmlFor="commentInput">Post comment</label>
       <div className="input-container">
         <input
+        id='commentInput'
           type="text"
           value={comment}
           onChange={({ target }) => setComment(target.value)}

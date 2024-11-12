@@ -36,7 +36,6 @@ function Category() {
   if (loading)
     return <Spinner styles={{ marginTop: "auto", placeSelf: "center" }} />;
 
-  console.log(category);
 
   return (
     <>

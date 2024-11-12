@@ -32,9 +32,6 @@ function ArticleCard({ article }) {
     return converted;
   }
 
-  console.log(article);
-  
-
   return (
     <Card>
       <h3>{article.title}</h3>

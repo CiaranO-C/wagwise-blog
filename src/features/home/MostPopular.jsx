@@ -34,7 +34,7 @@ function MostPopular({ articles }) {
   }
 
   return (
-    <Section>
+    <Section data-testid="carouselSection">
       <button onClick={handlePrev} className="left">
         <AiOutlineArrowLeft />
       </button>

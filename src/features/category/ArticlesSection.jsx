@@ -7,8 +7,6 @@ function ArticlesSection({ articles }) {
   const perPage = 2;
   const [range, setRange] = useState(articles.slice(0, perPage));
 
-  console.log(range);
-
   return (
     <Section>
       <ArticleGrid articles={range} />

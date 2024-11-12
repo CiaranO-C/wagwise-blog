@@ -61,7 +61,6 @@ function AuthForm() {
 
   async function handleSignIn() {
     const userLogin = await login(formData.username, formData.password);
-    console.log(userLogin);
 
     if (userLogin?.error) {
       return setErrors((prev) => ({ ...prev, form: userLogin.error }));
@@ -77,7 +76,6 @@ function AuthForm() {
       formData.password,
       formData.confirmPassword,
     );
-    console.log(newUser);
 
     if (newUser?.errors) {
       return setErrors((prev) => ({ ...prev, form: newUser.errors[0].msg }));
@@ -99,7 +97,6 @@ function AuthForm() {
     const hasErrors = checkErrors();
 
     if (hasEmpties || hasErrors) {
-      console.log("Form Denied!");
       return null;
     }
 

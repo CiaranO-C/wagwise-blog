@@ -2,7 +2,6 @@ import { API_URL } from "./utils";
 
 async function searchArticles(search) {
   const res = await fetch(`${API_URL}/api/articles/search${search}`);
-  console.log(res);
 
   if (!res.ok) return false;
 
