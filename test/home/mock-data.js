@@ -1,23 +1,58 @@
 import { daysSinceToday, getRandomSuffix, randomInt } from "../utils";
 
-function mockArticles(count = 10) {
-  const articles = [];
-
-  for (let i = 0; i < count; i++) {
-    const article = generateArticle(i);
-    articles.push(article);
-  }
-
-  return articles;
+function mockUser() {
+  const id = randomInt(2, 50);
+  return {
+    id,
+    username: getRandomSuffix("user"),
+    role: "USER",
+    likes: mockArticles(5),
+    comments: mockOwnComments(5, id),
+  };
 }
 
-function generateArticle(id) {
+function mockCategory(tagName) {
+  return {
+    tagName,
+    articles: mockArticles(15, [tagName]),
+  };
+}
+
+function mockArrayData(count, factory) {
+  const data = [];
+  for (let i = 0; i < count; i++) {
+    const field = factory(i);
+    data.push(field);
+  }
+  return data;
+}
+
+function mockOwnComments(count, authorId) {
+  return mockArrayData(count, (i) => generateOwnComment(i, authorId));
+}
+
+function generateOwnComment(i, authorId) {
+  return {
+    id: i,
+    text: getRandomSuffix("comment"),
+    authorId,
+    articleId: randomInt(0, 20),
+    created: daysSinceToday(i),
+    review: false,
+  };
+}
+
+function mockArticles(count = 10, tags = null) {
+  return mockArrayData(count, (i) => generateArticle(i, tags));
+}
+
+function generateArticle(id, tags) {
   const date = daysSinceToday(id + 1);
   const comments = mockComments(randomInt(0, 5), id);
   return {
     id,
     title: getRandomSuffix("test title"),
-    body: getRandomSuffix("<p>test body</p>"),
+    body: `<p>${getRandomSuffix("test body")}</p>`,
     authorId: 1,
     created: date,
     updated: date,
@@ -30,18 +65,12 @@ function generateArticle(id) {
       comments: comments.length,
     },
     comments,
-    tags: mockTags(randomInt(1, 3)),
+    tags: tags ? tags : mockTags(randomInt(1, 3)),
   };
 }
 
 function mockComments(count, articleId) {
-  const comments = [];
-
-  for (let i = 0; i < count; i++) {
-    const comment = generateComment(articleId, i);
-    comments.push(comment);
-  }
-  return comments;
+  return mockArrayData(count, (i) => generateComment(i, articleId));
 }
 
 function generateComment(articleId, index) {
@@ -68,13 +97,7 @@ function generateTag() {
 }
 
 function mockTags(count = 5) {
-  const tags = [];
-
-  for (let i = 0; i < count; i++) {
-    const tag = generateTag();
-    tags.push(tag);
-  }
-  return tags;
+  return mockArrayData(count, generateTag);
 }
 
-export { mockArticles, mockTags };
+export { mockArticles, mockTags, mockUser, mockCategory };
