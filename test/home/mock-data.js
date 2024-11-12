@@ -1,4 +1,4 @@
-import { getRandomSuffix, randomInt } from "../utils";
+import { daysSinceToday, getRandomSuffix, randomInt } from "../utils";
 
 function mockArticles(count = 10) {
   const articles = [];
@@ -12,7 +12,8 @@ function mockArticles(count = 10) {
 }
 
 function generateArticle(id) {
-  const date = new Date().toISOString();
+  const date = daysSinceToday(id + 1);
+  const comments = mockComments(randomInt(0, 5), id);
   return {
     id,
     title: getRandomSuffix("test title"),
@@ -26,9 +27,9 @@ function generateArticle(id) {
     },
     _count: {
       likes: randomInt(0, 50),
-      comments: randomInt(0, 10),
+      comments: comments.length,
     },
-    comments: mockComments(randomInt(0, 5), id),
+    comments,
     tags: mockTags(randomInt(1, 3)),
   };
 }
@@ -49,7 +50,7 @@ function generateComment(articleId, index) {
     text: getRandomSuffix("comment"),
     authorId: randomInt(1, 50),
     articleId,
-    created: new Date().toISOString(),
+    created: daysSinceToday(index),
     review: false,
     author: {
       username: getRandomSuffix("Guest"),
